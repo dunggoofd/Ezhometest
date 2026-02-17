@@ -167,7 +167,7 @@ export default function ProductBundles() {
         {/* Custom Bundle CTA */}
         <div className="mt-12 text-center">
           <p className="text-gray-600 mb-4">
-            Don't see the perfect bundle? Create your own!
+            Don&apos;t see the perfect bundle? Create your own!
           </p>
           <a
             href="#configurator"

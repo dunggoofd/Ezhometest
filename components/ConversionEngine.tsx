@@ -123,7 +123,7 @@ export default function ConversionEngine() {
                   name: 'Jennifer L.',
                   location: 'Seattle, WA',
                   rating: 5,
-                  text: 'The Italian leather option is stunning. Looks way more expensive than it is. Best furniture purchase I\'ve made.',
+                  text: 'The Italian leather option is stunning. Looks way more expensive than it is. Best furniture purchase I&apos;ve made.',
                   image: '/images/testimonial-3.jpg',
                 },
               ].map((testimonial, idx) => (
@@ -143,7 +143,7 @@ export default function ConversionEngine() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-gray-300 mb-4">"{testimonial.text}"</p>
+                  <p className="text-gray-300 mb-4">&ldquo;{testimonial.text}&rdquo;</p>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-600" />
                     <div>
@@ -218,7 +218,7 @@ export default function ConversionEngine() {
             
             <div className="text-center mb-6">
               <div className="text-5xl mb-4">🎁</div>
-              <h3 className="text-2xl font-bold mb-2">Wait! Don't Leave Empty-Handed</h3>
+              <h3 className="text-2xl font-bold mb-2">Wait! Don&apos;t Leave Empty-Handed</h3>
               <p className="text-gray-600">
                 Get <span className="font-bold text-premium-gold">15% OFF</span> your first order
               </p>

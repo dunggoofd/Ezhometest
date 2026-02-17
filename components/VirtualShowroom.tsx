@@ -14,11 +14,6 @@ const OrbitControls = dynamic(
   { ssr: false }
 )
 
-const Environment = dynamic(
-  () => import('@react-three/drei').then(mod => mod.Environment),
-  { ssr: false }
-)
-
 function SofaModel() {
   return (
     <mesh rotation={[0, Math.PI / 4, 0]}>
@@ -159,7 +154,7 @@ export default function VirtualShowroom() {
                 </h4>
                 <ol className="space-y-2 text-sm text-gray-700 list-decimal list-inside">
                   <li>Open this page on your mobile device</li>
-                  <li>Tap "View in Your Space"</li>
+                  <li>Tap &ldquo;View in Your Space&rdquo;</li>
                   <li>Point camera at your floor</li>
                   <li>Place and move the sofa</li>
                 </ol>
@@ -182,7 +177,6 @@ export default function VirtualShowroom() {
                       <pointLight position={[-10, -10, -10]} />
                       <SofaModel />
                       <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
-                      <Environment preset="apartment" />
                     </Canvas>
                   </Suspense>
                 </div>
@@ -195,6 +189,7 @@ export default function VirtualShowroom() {
                       To experience augmented reality, please open this page on a mobile device with AR capabilities
                     </p>
                     <div className="inline-flex gap-4">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img 
                         src="/images/qr-code.png" 
                         alt="QR Code to open on mobile"
