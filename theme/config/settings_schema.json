@@ -1,0 +1,226 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "EzHome",
+    "theme_version": "1.0.0",
+    "theme_author": "EzHome",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary (Ink)",
+        "default": "#141416"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent (Coral)",
+        "default": "#FF6B42"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary (Sage)",
+        "default": "#3A6B3A"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background (Cream)",
+        "default": "#FBF9F5"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body Text",
+        "default": "#141416"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border",
+        "default": "#E8E6E1"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading Font",
+        "default": "instrument_sans_n7"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body Font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_scale",
+        "label": "Body Font Size Scale",
+        "min": 80,
+        "max": 130,
+        "step": 5,
+        "default": 100,
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page Width",
+        "min": 1000,
+        "max": 1600,
+        "step": 50,
+        "default": 1440,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "label": "Content Width",
+        "min": 800,
+        "max": 1400,
+        "step": 50,
+        "default": 1200,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "label": "Space Between Sections",
+        "min": 24,
+        "max": 128,
+        "step": 8,
+        "default": 80,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart Type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" },
+          { "value": "popup", "label": "Popup notification" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_free_shipping_bar",
+        "label": "Show Free Shipping Progress Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free Shipping Threshold (cents)",
+        "default": "15000",
+        "info": "Enter amount in cents. 15000 = $150.00"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_cross_sell",
+        "label": "Show Cross-Sell Products",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "32 x 32px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Free Delivery & Trust",
+    "settings": [
+      {
+        "type": "text",
+        "id": "trust_delivery_text",
+        "label": "Delivery Trust Text",
+        "default": "Free Delivery"
+      },
+      {
+        "type": "text",
+        "id": "trust_assembly_text",
+        "label": "Assembly Trust Text",
+        "default": "10-Min Assembly"
+      },
+      {
+        "type": "text",
+        "id": "trust_warranty_text",
+        "label": "Warranty Trust Text",
+        "default": "5-Year Warranty"
+      },
+      {
+        "type": "text",
+        "id": "trust_trial_text",
+        "label": "Trial Trust Text",
+        "default": "100-Night Trial"
+      }
+    ]
+  }
+]

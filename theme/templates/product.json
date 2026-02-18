@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "settings": {
+        "enable_sticky_info": true,
+        "show_vendor": false,
+        "show_sku": false
+      },
+      "blocks": {
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant-picker": { "type": "variant_picker", "settings": { "picker_type": "button" } },
+        "quantity": { "type": "quantity_selector", "settings": {} },
+        "buy-buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": true } },
+        "description": { "type": "description", "settings": {} },
+        "assembly-badge": { "type": "custom_badge", "settings": { "icon": "clock", "text": "10-Minute Assembly — No Tools Required" } },
+        "shipping-badge": { "type": "custom_badge", "settings": { "icon": "truck", "text": "Free Shipping on All Orders" } },
+        "warranty-badge": { "type": "custom_badge", "settings": { "icon": "shield", "text": "5-Year Warranty · 100-Night Trial" } }
+      },
+      "block_order": ["title", "price", "variant-picker", "quantity", "buy-buttons", "description", "assembly-badge", "shipping-badge", "warranty-badge"]
+    },
+    "product-tabs": {
+      "type": "product-tabs",
+      "settings": {},
+      "blocks": {
+        "tab-specs": { "type": "tab", "settings": { "title": "Specifications", "content_source": "metafield", "metafield_key": "custom.specifications" } },
+        "tab-assembly": { "type": "tab", "settings": { "title": "Assembly", "content_source": "metafield", "metafield_key": "custom.assembly_instructions" } },
+        "tab-shipping": { "type": "tab", "settings": { "title": "Shipping & Returns", "content_source": "page", "page_handle": "shipping-returns" } }
+      },
+      "block_order": ["tab-specs", "tab-assembly", "tab-shipping"]
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You May Also Like",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "product-tabs",
+    "recommendations"
+  ]
+}

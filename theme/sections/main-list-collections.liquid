@@ -1,0 +1,57 @@
+{%- comment -%}
+  EzHome — List Collections Section
+{%- endcomment -%}
+
+<div class="main-list-collections section-spacing">
+  <div class="page-width">
+    <div class="grid grid--3">
+      {%- for collection in collections -%}
+        {%- unless collection.handle == 'all' -%}
+          <a href="{{ collection.url }}" class="collection-card">
+            <div class="collection-card__media">
+              {%- if collection.image -%}
+                <img
+                  src="{{ collection.image | image_url: width: 600 }}"
+                  srcset="{{ collection.image | image_url: width: 400 }} 400w, {{ collection.image | image_url: width: 600 }} 600w"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 480px) 50vw, 100vw"
+                  alt="{{ collection.title | escape }}"
+                  loading="lazy"
+                  width="{{ collection.image.width }}"
+                  height="{{ collection.image.height }}"
+                >
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              <div class="collection-card__overlay"></div>
+            </div>
+            <div class="collection-card__info">
+              <h2 class="text-heading-md">{{ collection.title }}</h2>
+              <span class="text-body-sm color-secondary">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+            </div>
+          </a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .collection-card { display: block; text-decoration: none; color: inherit; }
+  .collection-card__media { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; }
+  .collection-card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--duration-normal) var(--ease-out); }
+  .collection-card:hover .collection-card__media img { transform: scale(1.05); }
+  .collection-card__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.3), transparent); }
+  .collection-card__info { padding: var(--space-3) 0; }
+</style>
+
+{% schema %}
+{
+  "name": "All Collections",
+  "tag": "section",
+  "class": "section--list-collections",
+  "limit": 1,
+  "settings": [
+    { "type": "range", "id": "columns", "label": "Columns", "min": 2, "max": 4, "step": 1, "default": 3 }
+  ]
+}
+{% endschema %}

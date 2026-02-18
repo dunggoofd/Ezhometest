@@ -1,0 +1,168 @@
+{%- comment -%}
+  Renders JSON-LD structured data.
+  Called from theme.liquid <head>.
+{%- endcomment -%}
+
+{%- comment -%} Organization {%- endcomment -%}
+{%- if template.name == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      {%- if shop.brand.logo -%}
+        "logo": {{ shop.brand.logo | image_url: width: 600 | prepend: 'https:' | json }},
+      {%- endif -%}
+      "sameAs": [
+        {{ settings.social_instagram | json }}{% if settings.social_facebook != blank %},{{ settings.social_facebook | json }}{% endif %}{% if settings.social_tiktok != blank %},{{ settings.social_tiktok | json }}{% endif %}{% if settings.social_youtube != blank %},{{ settings.social_youtube | json }}{% endif %}
+      ]
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "url": {{ shop.url | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ shop.url | append: '/search?q={search_term_string}' | json }},
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Product {%- endcomment -%}
+{%- if template.name == 'product' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 5000 | json }},
+      "url": {{ canonical_url | json }},
+      {%- if product.featured_image -%}
+        "image": [
+          {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }}
+        ],
+      {%- endif -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      "brand": {
+        "@type": "Brand",
+        "name": {{ product.vendor | json }}
+      },
+      {%- if product.metafields.reviews.rating.value != blank -%}
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ product.metafields.reviews.rating.value | json }},
+          "reviewCount": {{ product.metafields.reviews.rating_count.value | json }}
+        },
+      {%- endif -%}
+      "offers": {
+        "@type": "Offer",
+        "url": {{ canonical_url | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ product.selected_or_first_available_variant.price | money_without_currency | strip_html | json }},
+        {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+          "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+        {%- endif -%}
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        }
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Collection {%- endcomment -%}
+{%- if template.name == 'collection' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "description": {{ collection.description | strip_html | truncate: 5000 | json }},
+      "url": {{ canonical_url | json }}
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Article {%- endcomment -%}
+{%- if template.name == 'article' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": {{ article.title | json }},
+      "description": {{ article.excerpt_or_content | strip_html | truncate: 200 | json }},
+      "url": {{ canonical_url | json }},
+      {%- if article.image -%}
+        "image": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+      {%- endif -%}
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "author": {
+        "@type": "Person",
+        "name": {{ article.author | json }}
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      }
+    }
+  </script>
+{%- endif -%}
+
+{%- comment -%} Breadcrumbs (non-homepage) {%- endcomment -%}
+{%- unless template.name == 'index' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": {{ shop.url | json }}
+        }
+        {%- if template.name == 'collection' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ collection.title | json }},
+            "item": {{ collection.url | prepend: shop.url | json }}
+          }
+        {%- elsif template.name == 'product' -%}
+          {%- if product.collections.size > 0 -%}
+            {%- assign first_collection = product.collections | first -%}
+            ,{
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ first_collection.title | json }},
+              "item": {{ first_collection.url | prepend: shop.url | json }}
+            }
+          {%- endif -%}
+          ,{
+            "@type": "ListItem",
+            "position": {% if product.collections.size > 0 %}3{% else %}2{% endif %},
+            "name": {{ product.title | json }},
+            "item": {{ product.url | prepend: shop.url | json }}
+          }
+        {%- elsif template.name == 'page' -%}
+          ,{
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | json }},
+            "item": {{ page.url | prepend: shop.url | json }}
+          }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endunless -%}

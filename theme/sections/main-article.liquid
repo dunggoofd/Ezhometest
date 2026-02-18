@@ -1,0 +1,123 @@
+{%- comment -%}
+  EzHome — Main Article Section
+{%- endcomment -%}
+
+<article class="main-article section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width narrow-width">
+    <header class="main-article__header">
+      {%- if article.tags.size > 0 -%}
+        <div class="main-article__tags">
+          {%- for tag in article.tags -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="text-overline color-accent">{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <h1 class="main-article__title text-display-lg">{{ article.title }}</h1>
+
+      <div class="main-article__meta text-body-sm color-secondary">
+        {%- if section.settings.show_author and article.author -%}
+          <span>By {{ article.author }}</span>
+        {%- endif -%}
+        {%- if section.settings.show_date -%}
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+            {{ article.published_at | date: '%B %d, %Y' }}
+          </time>
+        {%- endif -%}
+      </div>
+    </header>
+
+    {%- if section.settings.show_featured_image and article.image -%}
+      <div class="main-article__hero">
+        {%- render 'responsive-image',
+          image: article.image,
+          widths: '600,900,1200',
+          sizes: '(min-width: 768px) 720px, 100vw',
+          loading: 'eager',
+          class: 'main-article__hero-image'
+        -%}
+      </div>
+    {%- endif -%}
+
+    <div class="main-article__content rte">
+      {{ article.content }}
+    </div>
+
+    {%- if section.settings.show_share_buttons -%}
+      <div class="main-article__share">
+        <span class="text-body-sm" style="font-weight: var(--weight-semibold);">Share this article</span>
+        <div class="main-article__share-links">
+          <a href="https://twitter.com/intent/tweet?url={{ article.url | prepend: shop.url | url_encode }}&text={{ article.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ article.url | prepend: shop.url | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if blog.comments_enabled? -%}
+      <div class="main-article__comments" id="comments">
+        <h3 class="text-heading-lg">{{ article.comments_count }} {{ article.comments_count | pluralize: 'Comment', 'Comments' }}</h3>
+
+        {%- for comment in article.comments -%}
+          <div class="main-article__comment">
+            <p class="text-body-sm" style="font-weight: var(--weight-semibold);">{{ comment.author }}</p>
+            <p class="text-body-md">{{ comment.content }}</p>
+            <time class="text-body-xs color-secondary" datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: '%B %d, %Y' }}</time>
+          </div>
+        {%- endfor -%}
+
+        {%- form 'new_comment', article, class: 'main-article__comment-form' -%}
+          <h4 class="text-heading-sm">Leave a Comment</h4>
+          <div class="form-field">
+            <label class="form-label" for="comment-author">Name</label>
+            <input type="text" name="comment[author]" id="comment-author" class="form-input" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="comment-email">Email</label>
+            <input type="email" name="comment[email]" id="comment-email" class="form-input" required>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="comment-body">Comment</label>
+            <textarea name="comment[body]" id="comment-body" class="form-textarea" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary">Post Comment</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+<style>
+  .main-article__header { margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); }
+  .main-article__tags { display: flex; gap: var(--space-2); }
+  .main-article__title { margin: 0; }
+  .main-article__meta { display: flex; gap: var(--space-3); }
+  .main-article__hero { margin-bottom: var(--space-8); border-radius: var(--radius-xl); overflow: hidden; }
+  .main-article__hero-image { width: 100%; height: auto; }
+  .main-article__share { display: flex; align-items: center; gap: var(--space-3); padding-top: var(--space-6); margin-top: var(--space-8); border-top: 1px solid var(--border-secondary); }
+  .main-article__share-links { display: flex; gap: var(--space-2); }
+  .main-article__share-links a { color: var(--text-secondary); }
+  .main-article__share-links a:hover { color: var(--text-primary); }
+  .main-article__comments { margin-top: var(--space-10); padding-top: var(--space-8); border-top: 1px solid var(--border-secondary); }
+  .main-article__comment { padding: var(--space-4) 0; border-bottom: 1px solid var(--border-secondary); }
+  .main-article__comment p { margin: var(--space-1) 0; }
+  .main-article__comment-form { margin-top: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+</style>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "section--main-article",
+  "limit": 1,
+  "settings": [
+    { "type": "checkbox", "id": "show_featured_image", "label": "Show featured image", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_share_buttons", "label": "Show share buttons", "default": true }
+  ]
+}
+{% endschema %}

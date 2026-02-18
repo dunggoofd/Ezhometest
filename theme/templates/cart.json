@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main-cart": {
+      "type": "main-cart",
+      "settings": {
+        "enable_cart_note": true
+      }
+    },
+    "cart-upsell": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "You Might Also Like",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main-cart", "cart-upsell"]
+}

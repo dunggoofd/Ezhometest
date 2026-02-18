@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "page-banner": {
+      "type": "page-banner",
+      "settings": {
+        "custom_heading": "Get In Touch"
+      }
+    },
+    "contact-form": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "We'd Love To Hear From You",
+        "text": "Have a question about your order, need assembly help, or just want to say hi? Our team typically responds within 24 hours."
+      }
+    },
+    "contact-info": {
+      "type": "multi-column",
+      "settings": {
+        "heading": "Other Ways To Reach Us"
+      },
+      "blocks": {
+        "email": { "type": "column", "settings": { "heading": "Email", "text": "<p>hello@ezhome.com</p>" } },
+        "phone": { "type": "column", "settings": { "heading": "Phone", "text": "<p>1-800-EZHOME1<br>Mon–Fri 9am–6pm EST</p>" } },
+        "social": { "type": "column", "settings": { "heading": "Social", "text": "<p>@ezhome on Instagram, TikTok, and Twitter</p>" } }
+      },
+      "block_order": ["email", "phone", "social"]
+    }
+  },
+  "order": ["page-banner", "contact-form", "contact-info"]
+}

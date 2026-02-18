@@ -1,0 +1,137 @@
+{%- comment -%}
+  Renders breadcrumb navigation.
+
+  Usage:
+    {% render 'breadcrumbs' %}
+
+  Automatically generates breadcrumbs based on current template/page context.
+{%- endcomment -%}
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="/" class="breadcrumbs__link" itemprop="item">
+        <span itemprop="name">Home</span>
+      </a>
+      <meta itemprop="position" content="1">
+    </li>
+
+    {%- if template.name == 'product' -%}
+      {%- if product.collections.size > 0 -%}
+        {%- assign collection = product.collections | first -%}
+        <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <a href="{{ collection.url }}" class="breadcrumbs__link" itemprop="item">
+            <span itemprop="name">{{ collection.title }}</span>
+          </a>
+          <meta itemprop="position" content="2">
+        </li>
+      {%- endif -%}
+
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ product.title }}</span>
+        <meta itemprop="position" content="{{ product.collections.size | plus: 2 }}">
+      </li>
+
+    {%- elsif template.name == 'collection' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ collection.title }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+
+    {%- elsif template.name == 'article' -%}
+      <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <a href="{{ blog.url }}" class="breadcrumbs__link" itemprop="item">
+          <span itemprop="name">{{ blog.title }}</span>
+        </a>
+        <meta itemprop="position" content="2">
+      </li>
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ article.title }}</span>
+        <meta itemprop="position" content="3">
+      </li>
+
+    {%- elsif template.name == 'blog' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ blog.title }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+
+    {%- elsif template.name == 'page' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ page.title }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+
+    {%- elsif template.name == 'search' -%}
+      <li class="breadcrumbs__item breadcrumbs__item--current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+        <svg class="breadcrumbs__separator" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span itemprop="name">{{ 'search.title' | t }}</span>
+        <meta itemprop="position" content="2">
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    padding-block: var(--space-4);
+  }
+
+  .breadcrumbs__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    font-size: var(--text-body-sm);
+    color: var(--text-secondary);
+  }
+
+  .breadcrumbs__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .breadcrumbs__link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .breadcrumbs__link:hover {
+    color: var(--text-primary);
+  }
+
+  .breadcrumbs__item--current {
+    color: var(--text-primary);
+    font-weight: var(--weight-medium);
+  }
+
+  .breadcrumbs__separator {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+</style>

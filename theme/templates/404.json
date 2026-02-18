@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main-404": {
+      "type": "main-404",
+      "settings": {
+        "heading": "Page Not Found",
+        "text": "The page you're looking for has moved or doesn't exist. But your dream sofa is still here.",
+        "show_search": true,
+        "cta_text": "Back To Home"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Check Out Our Bestsellers",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["main-404", "featured-collection"]
+}

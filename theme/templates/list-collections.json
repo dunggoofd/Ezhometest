@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "page-banner": {
+      "type": "page-banner",
+      "settings": {
+        "custom_heading": "All Collections"
+      }
+    },
+    "main-list-collections": {
+      "type": "main-list-collections",
+      "settings": {
+        "columns": 3
+      }
+    }
+  },
+  "order": ["page-banner", "main-list-collections"]
+}

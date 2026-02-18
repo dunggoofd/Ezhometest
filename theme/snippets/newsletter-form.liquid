@@ -1,0 +1,92 @@
+{%- comment -%}
+  Renders newsletter signup form.
+
+  Usage:
+    {% render 'newsletter-form', heading: 'Subscribe', subtext: 'Get updates' %}
+
+  Parameters:
+    - heading: Form heading text
+    - subtext: Description text below heading
+{%- endcomment -%}
+
+<div class="newsletter-form">
+  {%- if heading != blank -%}
+    <h3 class="newsletter-form__heading text-heading-md">{{ heading }}</h3>
+  {%- endif -%}
+
+  {%- if subtext != blank -%}
+    <p class="newsletter-form__text text-body-sm color-secondary">{{ subtext }}</p>
+  {%- endif -%}
+
+  {%- form 'customer', id: 'newsletter-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    {%- if form.errors -%}
+      <div class="newsletter-form__error text-body-sm" role="alert">
+        {{ form.errors | default_errors }}
+      </div>
+    {%- endif -%}
+
+    {%- if form.posted_successfully? -%}
+      <p class="newsletter-form__success text-body-sm" role="status">
+        {{ 'newsletter.success' | t }}
+      </p>
+    {%- else -%}
+      <div class="newsletter-form__field">
+        <label for="newsletter-email" class="visually-hidden">{{ 'newsletter.label' | t }}</label>
+        <input
+          type="email"
+          name="contact[email]"
+          id="newsletter-email"
+          class="form-input newsletter-form__input"
+          placeholder="{{ 'newsletter.placeholder' | t }}"
+          required
+          autocomplete="email"
+          aria-label="{{ 'newsletter.label' | t }}"
+        >
+        <button type="submit" class="btn btn--primary newsletter-form__btn">
+          {{ 'newsletter.submit' | t }}
+        </button>
+      </div>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+<style>
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .newsletter-form__field {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .newsletter-form__input {
+    flex: 1;
+  }
+
+  .newsletter-form__btn {
+    flex-shrink: 0;
+  }
+
+  .newsletter-form__error {
+    color: var(--status-error);
+    padding: var(--space-2) var(--space-3);
+    background-color: var(--color-red-50);
+    border-radius: var(--radius-sm);
+  }
+
+  .newsletter-form__success {
+    color: var(--status-success);
+    font-weight: var(--weight-medium);
+  }
+
+  @media (max-width: 480px) {
+    .newsletter-form__field {
+      flex-direction: column;
+    }
+  }
+</style>

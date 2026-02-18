@@ -1,0 +1,78 @@
+{%- comment -%}
+  Renders social media icon links.
+
+  Usage:
+    {% render 'social-icons' %}
+{%- endcomment -%}
+
+<div class="social-icons">
+  {%- if settings.social_instagram != blank -%}
+    <a href="{{ settings.social_instagram }}" class="social-icons__link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+      </svg>
+    </a>
+  {%- endif -%}
+
+  {%- if settings.social_facebook != blank -%}
+    <a href="{{ settings.social_facebook }}" class="social-icons__link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  {%- endif -%}
+
+  {%- if settings.social_tiktok != blank -%}
+    <a href="{{ settings.social_tiktok }}" class="social-icons__link" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  {%- endif -%}
+
+  {%- if settings.social_pinterest != blank -%}
+    <a href="{{ settings.social_pinterest }}" class="social-icons__link" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M8 12a4 4 0 118 0c0 4-3 6-3 6l-1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 15l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+  {%- endif -%}
+
+  {%- if settings.social_youtube != blank -%}
+    <a href="{{ settings.social_youtube }}" class="social-icons__link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  {%- endif -%}
+</div>
+
+<style>
+  .social-icons {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .social-icons__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    transition:
+      color var(--duration-fast) var(--ease-default),
+      background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .social-icons__link:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+</style>

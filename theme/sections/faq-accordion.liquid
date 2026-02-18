@@ -1,0 +1,107 @@
+{%- comment -%}
+  EzHome — FAQ Accordion Section
+{%- endcomment -%}
+
+<div class="faq-section section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width content-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="faq-section__header reveal">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="text-overline color-accent">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="text-heading-xl">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <accordion-group class="faq-section__list" data-allow-multiple="true">
+      {%- for block in section.blocks -%}
+        <details class="faq-section__item reveal" style="--reveal-delay: {{ forloop.index }};" {{ block.shopify_attributes }}>
+          <summary class="faq-section__question">
+            <span class="text-heading-sm">{{ block.settings.question }}</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="faq-section__answer rte text-body-md color-secondary">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endfor -%}
+    </accordion-group>
+  </div>
+</div>
+
+<style>
+  .faq-section__header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .faq-section__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-secondary);
+  }
+
+  .faq-section__item {
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  .faq-section__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) 0;
+    cursor: pointer;
+    list-style: none;
+    gap: var(--space-4);
+  }
+
+  .faq-section__question::-webkit-details-marker { display: none; }
+
+  .faq-section__question svg {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-default);
+  }
+
+  details[open] > .faq-section__question svg { transform: rotate(180deg); }
+
+  .faq-section__answer {
+    padding-bottom: var(--space-5);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "tag": "section",
+  "class": "section--faq",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "QUESTIONS? GOOD." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How does the compression technology work?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Each sofa is built around a patent-pending internal frame that collapses along engineered fold points. Once unboxed, the foam expands to full shape in under 5 minutes.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "category": "EzHome",
+      "blocks": [
+        { "type": "question", "settings": { "question": "How does the compression technology actually work?", "answer": "<p>Each sofa is built around a patent-pending internal frame that collapses along engineered fold points. We vacuum-compress the cushion layers into a box roughly 60 cm wide — small enough for any standard doorway. Once unboxed, the foam expands to full shape in under 5 minutes. No tools required.</p>" } },
+        { "type": "question", "settings": { "question": "Will the sofa feel the same after expanding?", "answer": "<p>Yes. The high-density foam core reaches 95% of its full loft within 2 hours and 100% within 24 hours. We've tested this across 5,000+ units with a 4.9-star average comfort rating. 100-night trial if it doesn't feel right.</p>" } },
+        { "type": "question", "settings": { "question": "What's included in the box?", "answer": "<p>Zero tools needed. Inside you'll find your compressed sofa, screw-in legs (hand-tighten only), and a quick-start card. Total setup time: under 10 minutes.</p>" } },
+        { "type": "question", "settings": { "question": "What's the return policy?", "answer": "<p>100-night trial. If it's not for you, we arrange free pickup and give a full refund — no restocking fees, no fine print.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

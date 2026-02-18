@@ -1,0 +1,98 @@
+{%- comment -%}
+  EzHome — Main Search Section
+{%- endcomment -%}
+
+<predictive-search data-section-id="{{ section.id }}">
+  <div class="main-search section-spacing">
+    <div class="page-width">
+      <h1 class="text-heading-2xl" style="margin-bottom: var(--space-6);">
+        {%- if search.performed -%}
+          {{ search.results_count }} results for "{{ search.terms }}"
+        {%- else -%}
+          Search
+        {%- endif -%}
+      </h1>
+
+      <form action="{{ routes.search_url }}" method="get" class="main-search__form" role="search">
+        <div class="main-search__field">
+          <input
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="Search products, articles..."
+            class="form-input main-search__input"
+            aria-label="Search"
+            autocomplete="off"
+            data-predictive-search-input
+          >
+          <button type="submit" class="btn btn--primary">Search</button>
+        </div>
+      </form>
+
+      {%- if search.performed -%}
+        {%- if search.results.size > 0 -%}
+          <div class="main-search__results grid grid--3" style="margin-top: var(--space-8);">
+            {%- for item in search.results -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {%- render 'product-card', product: item -%}
+                {%- when 'article' -%}
+                  <article class="blog-card">
+                    {%- if item.image -%}
+                      <a href="{{ item.url }}" class="blog-card__media">
+                        <img src="{{ item.image | image_url: width: 400 }}" alt="{{ item.title | escape }}" loading="lazy" class="blog-card__image">
+                      </a>
+                    {%- endif -%}
+                    <div class="blog-card__info">
+                      <span class="text-overline color-accent">Article</span>
+                      <h3 class="text-heading-sm"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                      <p class="text-body-sm color-secondary">{{ item.content | strip_html | truncate: 100 }}</p>
+                    </div>
+                  </article>
+                {%- when 'page' -%}
+                  <div class="search-result-page">
+                    <span class="text-overline color-accent">Page</span>
+                    <h3 class="text-heading-sm"><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                    <p class="text-body-sm color-secondary">{{ item.content | strip_html | truncate: 100 }}</p>
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            {%- render 'pagination', paginate: paginate -%}
+          {%- endif -%}
+        {%- else -%}
+          <div style="text-align: center; padding: var(--space-12) 0;">
+            <p class="text-body-lg">No results found for "{{ search.terms }}"</p>
+            <p class="text-body-md color-secondary">Try a different search term or browse our collections.</p>
+            <a href="/collections/all" class="btn btn--primary" style="margin-top: var(--space-4);">Browse All Products</a>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</predictive-search>
+
+{{ 'predictive-search.js' | asset_url | script_tag: defer: true }}
+
+<style>
+  .main-search__form { max-width: 600px; }
+  .main-search__field { display: flex; gap: var(--space-2); }
+  .main-search__input { flex: 1; }
+  .search-result-page { display: flex; flex-direction: column; gap: var(--space-1); }
+  .search-result-page a { color: inherit; }
+</style>
+
+{% schema %}
+{
+  "name": "Search Results",
+  "tag": "section",
+  "class": "section--main-search",
+  "limit": 1,
+  "settings": [
+    { "type": "checkbox", "id": "show_articles", "label": "Show articles", "default": true },
+    { "type": "checkbox", "id": "show_pages", "label": "Show pages", "default": true }
+  ]
+}
+{% endschema %}

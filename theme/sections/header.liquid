@@ -1,0 +1,483 @@
+{%- comment -%}
+  EzHome — Header Section
+  Logo, navigation, search, cart, account icons
+{%- endcomment -%}
+
+<sticky-header data-sticky-threshold="100">
+  <header class="header" data-section-id="{{ section.id }}" role="banner">
+    <div class="header__inner page-width">
+
+      {%- comment -%} Mobile menu toggle {%- endcomment -%}
+      <button class="header__menu-toggle" data-mobile-menu-toggle aria-label="{{ 'header.menu' | t }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      {%- comment -%} Logo {%- endcomment -%}
+      <div class="header__logo">
+        <a href="/" class="header__logo-link" aria-label="{{ shop.name }}">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: section.settings.logo_width | times: 2 }}"
+              alt="{{ shop.name | escape }}"
+              width="{{ section.settings.logo_width }}"
+              height="{{ section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio }}"
+              loading="eager"
+              class="header__logo-image"
+            >
+          {%- else -%}
+            <span class="header__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        {%- assign main_menu = linklists[section.settings.menu] -%}
+        {%- if main_menu != blank -%}
+          <ul class="header__nav-list">
+            {%- for link in main_menu.links -%}
+              <li class="header__nav-item{% if link.links.size > 0 %} has-dropdown{% endif %}">
+                <a
+                  href="{{ link.url }}"
+                  class="header__nav-link{% if link.active %} is-active{% endif %}"
+                  {% if link.current %}aria-current="page"{% endif %}
+                >
+                  {{ link.title }}
+                </a>
+
+                {%- if link.links.size > 0 -%}
+                  <div class="header__dropdown">
+                    <ul class="header__dropdown-list">
+                      {%- for child in link.links -%}
+                        <li>
+                          <a href="{{ child.url }}" class="header__dropdown-link{% if child.active %} is-active{% endif %}">
+                            {{ child.title }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </nav>
+
+      {%- comment -%} Icons (Search, Account, Cart) {%- endcomment -%}
+      <div class="header__icons">
+        {%- comment -%} Search {%- endcomment -%}
+        <a href="{{ routes.search_url }}" class="header__icon" aria-label="{{ 'general.accessibility.search' | t }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+
+        {%- comment -%} Account {%- endcomment -%}
+        <a href="{{ routes.account_url | default: routes.account_login_url }}" class="header__icon header__icon--account" aria-label="{{ 'general.accessibility.account' | t }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </a>
+
+        {%- comment -%} Cart {%- endcomment -%}
+        <button class="header__icon header__cart-icon" data-cart-trigger aria-label="{{ 'general.accessibility.cart' | t }}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6h18" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="header__cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>
+            {{ cart.item_count }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} Mobile Navigation Drawer {%- endcomment -%}
+  <mobile-drawer class="mobile-drawer">
+    <div class="mobile-drawer__overlay" data-drawer-overlay></div>
+    <div class="mobile-drawer__content" data-drawer-content>
+      <div class="mobile-drawer__header">
+        <span class="mobile-drawer__title">{{ shop.name }}</span>
+        <button class="mobile-drawer__close" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-drawer__nav" aria-label="Mobile navigation">
+        {%- assign main_menu = linklists[section.settings.menu] -%}
+        {%- if main_menu != blank -%}
+          <ul class="mobile-drawer__list">
+            {%- for link in main_menu.links -%}
+              <li class="mobile-drawer__item">
+                <a href="{{ link.url }}" class="mobile-drawer__link">{{ link.title }}</a>
+                {%- if link.links.size > 0 -%}
+                  <ul class="mobile-drawer__sublist">
+                    {%- for child in link.links -%}
+                      <li>
+                        <a href="{{ child.url }}" class="mobile-drawer__sublink">{{ child.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </nav>
+
+      <div class="mobile-drawer__footer">
+        <a href="{{ routes.account_url | default: routes.account_login_url }}" class="btn btn--secondary btn--full">
+          Account
+        </a>
+      </div>
+    </div>
+  </mobile-drawer>
+</sticky-header>
+
+<style>
+  /* ── Header Layout ── */
+  .header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-secondary);
+    height: var(--layout-header-height);
+    position: relative;
+    z-index: var(--z-sticky);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-6);
+  }
+
+  /* Sticky behavior */
+  sticky-header {
+    display: block;
+  }
+
+  sticky-header.header--sticky .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-slow) var(--ease-smooth);
+  }
+
+  sticky-header.header--sticky {
+    padding-bottom: var(--layout-header-height);
+  }
+
+  sticky-header.header--hidden .header {
+    transform: translateY(-100%);
+  }
+
+  /* ── Logo ── */
+  .header__logo-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo-text {
+    font-family: var(--font-display);
+    font-size: var(--text-heading-lg);
+    font-weight: var(--weight-bold);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .header__logo-image {
+    height: auto;
+  }
+
+  /* ── Desktop Nav ── */
+  .header__nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .header__nav-list {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  .header__nav-link {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-body-md);
+    font-weight: var(--weight-medium);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    transition:
+      background-color var(--duration-fast) var(--ease-default),
+      color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__nav-link:hover,
+  .header__nav-link.is-active {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  /* Dropdown */
+  .header__nav-item.has-dropdown {
+    position: relative;
+  }
+
+  .header__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    padding-top: var(--space-2);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--duration-fast) var(--ease-default),
+      visibility var(--duration-fast) var(--ease-default);
+  }
+
+  .header__nav-item.has-dropdown:hover .header__dropdown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .header__dropdown-list {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2);
+    overflow: hidden;
+  }
+
+  .header__dropdown-link {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-body-sm);
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    transition:
+      background-color var(--duration-fast) var(--ease-default),
+      color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__dropdown-link:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  /* ── Icons ── */
+  .header__icons {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .header__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .header__icon:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  .header__cart-icon {
+    position: relative;
+  }
+
+  .header__cart-count {
+    position: absolute;
+    top: 4px;
+    right: 2px;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--interactive-accent);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: var(--weight-bold);
+    border-radius: var(--radius-full);
+    padding: 0 4px;
+    line-height: 1;
+  }
+
+  /* ── Mobile menu button ── */
+  .header__menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 1024px) {
+    .header__menu-toggle { display: flex; }
+    .header__nav { display: none; }
+    .header__icon--account { display: none; }
+  }
+
+  /* ── Mobile Drawer ── */
+  mobile-drawer {
+    display: contents;
+  }
+
+  mobile-drawer:not([open]) .mobile-drawer__overlay,
+  mobile-drawer:not([open]) .mobile-drawer__content {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .mobile-drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    z-index: var(--z-drawer);
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-default);
+  }
+
+  mobile-drawer[open] .mobile-drawer__overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-drawer__content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(360px, 85vw);
+    background-color: var(--bg-primary);
+    z-index: calc(var(--z-drawer) + 1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform var(--duration-slow) var(--ease-smooth);
+  }
+
+  mobile-drawer[open] .mobile-drawer__content {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .mobile-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  .mobile-drawer__title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-heading-md);
+  }
+
+  .mobile-drawer__close {
+    color: var(--text-primary);
+  }
+
+  .mobile-drawer__nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4) 0;
+  }
+
+  .mobile-drawer__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-drawer__link {
+    display: block;
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-body-lg);
+    font-weight: var(--weight-medium);
+    color: var(--text-primary);
+  }
+
+  .mobile-drawer__sublist {
+    padding-left: var(--space-5);
+  }
+
+  .mobile-drawer__sublink {
+    display: block;
+    padding: var(--space-2) var(--space-5);
+    font-size: var(--text-body-md);
+    color: var(--text-secondary);
+  }
+
+  .mobile-drawer__footer {
+    padding: var(--space-4) var(--space-5);
+    border-top: 1px solid var(--border-secondary);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 120,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_homepage",
+      "label": "Transparent on homepage",
+      "default": false
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

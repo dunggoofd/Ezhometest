@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "video-hero": {
+      "type": "video-hero",
+      "settings": {
+        "eyebrow": "See It In Action",
+        "heading": "Watch The Full Assembly",
+        "text": "From box to beautiful in under 10 minutes."
+      }
+    },
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title" },
+        "price": { "type": "price" },
+        "variant-picker": { "type": "variant_picker" },
+        "quantity": { "type": "quantity_selector" },
+        "buy-buttons": { "type": "buy_buttons" },
+        "description": { "type": "description" },
+        "trust-1": { "type": "trust_badge", "settings": { "icon": "clock", "text": "10-Minute Assembly" } },
+        "trust-2": { "type": "trust_badge", "settings": { "icon": "truck", "text": "Free Shipping" } },
+        "trust-3": { "type": "trust_badge", "settings": { "icon": "shield", "text": "30-Day Free Trial" } }
+      },
+      "block_order": ["title", "price", "variant-picker", "quantity", "buy-buttons", "description", "trust-1", "trust-2", "trust-3"]
+    },
+    "assembly-steps": {
+      "type": "assembly-steps",
+      "settings": {
+        "eyebrow": "Step-by-Step",
+        "heading": "Assembly in 3 Easy Steps"
+      }
+    },
+    "product-tabs": {
+      "type": "product-tabs",
+      "blocks": {
+        "specs": { "type": "tab", "settings": { "heading": "Specifications", "content_source": "metafield" } },
+        "assembly": { "type": "tab", "settings": { "heading": "Assembly Guide", "content_source": "custom" } },
+        "shipping": { "type": "tab", "settings": { "heading": "Shipping & Returns", "content_source": "page" } }
+      },
+      "block_order": ["specs", "assembly", "shipping"]
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "Complete Your Space"
+      }
+    }
+  },
+  "order": ["video-hero", "main-product", "assembly-steps", "product-tabs", "recommendations"]
+}

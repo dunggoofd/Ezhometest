@@ -1,0 +1,90 @@
+{%- comment -%}
+  Renders active filter pills for collection filtering.
+
+  Usage:
+    {% render 'active-filters', filters: collection.filters %}
+
+  Parameters:
+    - filters: Array of Shopify filter objects
+{%- endcomment -%}
+
+{%- liquid
+  assign has_active_filters = false
+  for filter in filters
+    if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value
+      assign has_active_filters = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_active_filters -%}
+  <div class="active-filters" data-active-filters>
+    <div class="active-filters__list">
+      {%- for filter in filters -%}
+        {%- for value in filter.active_values -%}
+          <a href="{{ value.url_to_remove }}" class="active-filters__pill" data-filter-remove>
+            <span>{{ filter.label }}: {{ value.label }}</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M10.5 3.5l-7 7M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </a>
+        {%- endfor -%}
+
+        {%- if filter.type == 'price_range' -%}
+          {%- if filter.min_value.value or filter.max_value.value -%}
+            <a href="{{ filter.url_to_remove }}" class="active-filters__pill" data-filter-remove>
+              <span>
+                {{ filter.min_value.value | default: 0 | money }} –
+                {{ filter.max_value.value | default: filter.range_max | money }}
+              </span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M10.5 3.5l-7 7M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <a href="{{ collection.url }}" class="active-filters__clear btn btn--ghost btn--sm">
+        {{ 'collection.clear_filters' | t }}
+      </a>
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .active-filters {
+    padding-bottom: var(--space-4);
+  }
+
+  .active-filters__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  .active-filters__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: var(--text-body-sm);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-default);
+  }
+
+  .active-filters__pill:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+
+  .active-filters__clear {
+    color: var(--text-secondary);
+    font-size: var(--text-body-sm);
+  }
+</style>

@@ -1,0 +1,167 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "accessibility": {
+      "close": "Close",
+      "open": "Open",
+      "loading": "Loading…",
+      "menu": "Menu",
+      "cart": "Cart",
+      "search": "Search",
+      "account": "Account"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "cart_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "free_shipping_message": "You're {{ amount }} away from free shipping!",
+    "free_shipping_achieved": "You've unlocked free shipping! 🎉",
+    "shipping_note": "Shipping & taxes calculated at checkout",
+    "add_note": "Add order note",
+    "update": "Update"
+  },
+  "product": {
+    "add_to_cart": "Add to Cart",
+    "sold_out": "Sold Out",
+    "unavailable": "Unavailable",
+    "price": {
+      "from": "From {{ price }}",
+      "sale": "Sale price",
+      "regular": "Regular price",
+      "unit_price": "Unit price"
+    },
+    "quantity": {
+      "label": "Quantity",
+      "increase": "Increase quantity",
+      "decrease": "Decrease quantity"
+    },
+    "variant": {
+      "color": "Color",
+      "size": "Size",
+      "material": "Material"
+    },
+    "share": "Share this product",
+    "description": "Description",
+    "specifications": "Specifications",
+    "assembly": "Assembly",
+    "shipping_returns": "Shipping & Returns",
+    "reviews": "Reviews"
+  },
+  "collection": {
+    "title": "Collections",
+    "products_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "filter": "Filter",
+    "sort": "Sort by",
+    "sort_options": {
+      "manual": "Featured",
+      "best_selling": "Best Selling",
+      "title_ascending": "A–Z",
+      "title_descending": "Z–A",
+      "price_ascending": "Price: Low to High",
+      "price_descending": "Price: High to Low",
+      "created_ascending": "Oldest",
+      "created_descending": "Newest"
+    },
+    "clear_filters": "Clear all",
+    "no_products": "No products found. Try adjusting your filters.",
+    "load_more": "Load more",
+    "view_all": "View All"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products, articles…",
+    "no_results": "No results for \"{{ terms }}\"",
+    "results_count": {
+      "one": "{{ count }} result",
+      "other": "{{ count }} results"
+    },
+    "suggestions": "Suggestions"
+  },
+  "blog": {
+    "title": "Blog",
+    "read_more": "Read more",
+    "posted_on": "Posted on {{ date }}",
+    "by_author": "by {{ author }}",
+    "comments": {
+      "one": "{{ count }} comment",
+      "other": "{{ count }} comments"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "orders": "Order History",
+      "addresses": "Addresses",
+      "details": "Account Details",
+      "logout": "Log Out"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign In",
+      "forgot_password": "Forgot your password?",
+      "create_account": "Create Account"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "addresses": {
+      "title": "Addresses",
+      "add_new": "Add New Address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "default": "Default"
+    }
+  },
+  "newsletter": {
+    "label": "Email",
+    "placeholder": "your@email.com",
+    "submit": "Subscribe",
+    "success": "Thanks for subscribing!"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "previous_slide": "Previous slide",
+    "next_slide": "Next slide",
+    "slide_number": "Slide {{ number }} of {{ total }}"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{ number }}"
+  }
+}

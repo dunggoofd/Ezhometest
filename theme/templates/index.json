@@ -1,0 +1,125 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Sofa In. Stress Out. Instantly.",
+        "subheading": "A premium sofa that compresses to fit through any door — and looks like it never had to.",
+        "cta_text": "Shop the Collection",
+        "cta_url": "shopify:\/\/collections\/all",
+        "cta_secondary_text": "See How It Works →",
+        "cta_secondary_url": "",
+        "social_proof_text": "★ 4.9 · 2,400+ Happy Homes",
+        "overlay_opacity": 20,
+        "full_height": false
+      }
+    },
+    "value-props": {
+      "type": "value-propositions",
+      "settings": {
+        "heading": "Why EzHome?"
+      },
+      "blocks": {
+        "block-1": { "type": "value_prop", "settings": { "icon": "box", "title": "Fits In Your Car", "text": "Compressed to 1/5th the size" } },
+        "block-2": { "type": "value_prop", "settings": { "icon": "clock", "title": "10-Min Setup", "text": "No tools. No stress." } },
+        "block-3": { "type": "value_prop", "settings": { "icon": "truck", "title": "Free Shipping", "text": "Delivered to your door" } },
+        "block-4": { "type": "value_prop", "settings": { "icon": "shield", "title": "5-Year Warranty", "text": "Built to last" } }
+      },
+      "block_order": ["block-1", "block-2", "block-3", "block-4"]
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best Sellers",
+        "collection": "best-sellers",
+        "products_to_show": 4,
+        "columns": "4",
+        "show_view_all": true
+      }
+    },
+    "before-after": {
+      "type": "before-after-slider",
+      "settings": {
+        "eyebrow": "SEE THE TRANSFORMATION",
+        "heading": "See The Transformation",
+        "before_label": "In the box",
+        "after_label": "Fully assembled"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials-carousel",
+      "settings": {
+        "eyebrow": "DON'T TAKE OUR WORD FOR IT",
+        "heading": "2,400+ apartments. Zero sofas stuck in lobbies.",
+        "show_stats": true
+      },
+      "blocks": {
+        "review-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "We live on the 4th floor, no lift. Two of us carried it upstairs in the box. I still can't believe it expanded into THIS.",
+            "author": "Sam & Jess T.",
+            "detail": "Melbourne · 2-seater in Charcoal",
+            "rating": 5
+          }
+        },
+        "review-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Third apartment in two years. This sofa has moved with me every time — no removalists, no scratched walls, no stress.",
+            "author": "David K.",
+            "detail": "Sydney · 3-seater L-shape in Oat",
+            "rating": 5
+          }
+        },
+        "review-3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Honestly looks more expensive than it is. Guests always ask where it's from. The washable covers are a game-changer with kids.",
+            "author": "Michelle L.",
+            "detail": "Brisbane · Modular 4-piece in Sage",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": ["review-1", "review-2", "review-3"]
+    },
+    "assembly-cta": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "",
+        "heading": "10 Minutes. Zero Tools.",
+        "text": "<p>Watch how easy it is to set up your EzHome sofa. Unbox, expand, sink in — it's that simple.</p>",
+        "cta_text": "Watch Video",
+        "cta_url": "",
+        "image_position": "left"
+      }
+    },
+    "instagram-feed": {
+      "type": "instagram-feed",
+      "settings": {
+        "heading": "#MyEzHome",
+        "subtext": "Share your setup. Tag us for a chance to be featured."
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-signup",
+      "settings": {
+        "heading": "Join The EzHome Family",
+        "subtext": "Get early access, assembly tips & exclusive deals.",
+        "button_text": "Subscribe",
+        "disclaimer": "No spam. Unsubscribe anytime. We respect your inbox."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "value-props",
+    "featured-collection",
+    "before-after",
+    "testimonials",
+    "assembly-cta",
+    "instagram-feed",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "blog-banner": {
+      "type": "page-banner",
+      "settings": {
+        "custom_heading": "The EzHome Blog"
+      }
+    },
+    "main-blog": {
+      "type": "main-blog",
+      "settings": {
+        "posts_per_page": 9,
+        "show_date": true,
+        "show_author": false,
+        "show_tags": true
+      }
+    }
+  },
+  "order": ["blog-banner", "main-blog"]
+}

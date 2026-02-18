@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "collection-banner": {
+      "type": "collection-banner",
+      "settings": {
+        "show_image": true,
+        "show_description": true,
+        "overlay_opacity": 30
+      }
+    },
+    "main-collection": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 12,
+        "columns_desktop": "3",
+        "enable_filtering": true,
+        "enable_sorting": true
+      }
+    },
+    "collection-cta": {
+      "type": "image-with-text",
+      "settings": {
+        "heading": "Not Sure Which To Choose?",
+        "text": "<p>Take our 60-second quiz and find your perfect sofa.</p>",
+        "cta_text": "Take The Quiz",
+        "cta_url": "",
+        "image_position": "right"
+      }
+    }
+  },
+  "order": ["collection-banner", "main-collection", "collection-cta"]
+}

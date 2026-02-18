@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EzHome — The Compression Sofa for Apartment Living</title>
+  <meta name="description" content="Premium sofas that compress to fit through any doorway. Free delivery, 100-night trial, modular designs. Shop the collection.">
+
+  <!-- Google Fonts (local substitute for WOFF2) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../theme/assets/base.css">
+
+  <style>
+    /* Override @font-face since we use Google Fonts in preview */
+    @font-face { font-family: 'Instrument Sans'; src: local('Instrument Sans'); }
+    @font-face { font-family: 'Inter'; src: local('Inter'); }
+
+    /* Preview-only placeholder styles */
+    .placeholder-img {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--color-cream-100) 0%, var(--color-cream-300) 50%, var(--color-sage-50) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-tertiary); font-size: var(--text-body-sm);
+    }
+    .placeholder-product {
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, var(--color-cream-50) 0%, var(--color-cream-200) 100%);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-tertiary); font-size: var(--text-body-sm);
+    }
+
+    /* Make reveal visible in static preview */
+    .reveal { opacity: 1 !important; transform: none !important; }
+  </style>
+</head>
+<body class="template-index">
+
+  <a href="#main" class="skip-to-content visually-hidden">Skip to content</a>
+
+  <!-- ========================================
+       ANNOUNCEMENT BAR
+       ======================================== -->
+  <section class="announcement-bar-section">
+    <div class="announcement-bar color-inverse" style="background-color: var(--bg-inverse); color: var(--text-inverse); padding-block: var(--space-2); font-size: var(--text-body-sm); text-align: center;">
+      <div class="announcement-bar__inner page-width" style="display: flex; align-items: center; justify-content: center; gap: var(--space-4);">
+        <p style="font-weight: var(--weight-medium); margin: 0;">Free delivery on all orders this week — ends Sunday</p>
+        <button style="flex-shrink: 0; color: inherit; opacity: 0.7; padding: var(--space-1); background: none; border: none; cursor: pointer;" aria-label="Dismiss">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       HEADER
+       ======================================== -->
+  <header class="header" style="background-color: var(--bg-primary); border-bottom: 1px solid var(--border-secondary); height: var(--layout-header-height); position: relative; z-index: var(--z-sticky);">
+    <div class="header__inner page-width" style="display: flex; align-items: center; justify-content: space-between; height: 100%; gap: var(--space-6);">
+      <!-- Logo -->
+      <div class="header__logo">
+        <a href="/" style="font-family: var(--font-display); font-size: var(--text-heading-lg); font-weight: var(--weight-bold); color: var(--text-primary); letter-spacing: -0.02em; text-decoration: none;">
+          EzHome
+        </a>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav style="flex: 1; display: flex; justify-content: center; gap: var(--space-8);">
+        <a href="#" style="font-family: var(--font-body); font-size: var(--text-body-md); font-weight: var(--weight-medium); color: var(--text-primary); text-decoration: none;">Sofas</a>
+        <a href="#" style="font-family: var(--font-body); font-size: var(--text-body-md); font-weight: var(--weight-medium); color: var(--text-secondary); text-decoration: none;">Beds</a>
+        <a href="#" style="font-family: var(--font-body); font-size: var(--text-body-md); font-weight: var(--weight-medium); color: var(--text-secondary); text-decoration: none;">Covers</a>
+        <a href="#" style="font-family: var(--font-body); font-size: var(--text-body-md); font-weight: var(--weight-medium); color: var(--text-secondary); text-decoration: none;">Assembly</a>
+        <a href="#" style="font-family: var(--font-body); font-size: var(--text-body-md); font-weight: var(--weight-medium); color: var(--text-secondary); text-decoration: none;">Our Story</a>
+      </nav>
+
+      <!-- Icons -->
+      <div style="display: flex; align-items: center; gap: var(--space-4);">
+        <a href="#" aria-label="Search" style="color: var(--icon-primary);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#" aria-label="Account" style="color: var(--icon-primary);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        <button aria-label="Cart" style="color: var(--icon-primary); position: relative; background: none; border: none; cursor: pointer;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6h18" stroke="currentColor" stroke-width="1.5"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span style="position: absolute; top: -4px; right: -6px; background: var(--interactive-accent); color: white; font-size: 10px; font-weight: var(--weight-bold); width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================
+       MAIN
+       ======================================== -->
+  <main id="main" role="main" tabindex="-1">
+
+    <!-- ─── HERO BANNER ─── -->
+    <section class="hero-banner" style="position: relative; display: flex; align-items: center; justify-content: center; min-height: 85vh; overflow: hidden;">
+      <div class="hero-banner__media" style="position: absolute; inset: 0;">
+        <div class="placeholder-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 30%, #0f3460 60%, #533483 100%);"></div>
+        <div style="position: absolute; inset: 0; background-color: var(--color-ink-950); opacity: 0.35;"></div>
+      </div>
+      <div class="hero-banner__content page-width" style="position: relative; z-index: 1; text-align: center; padding-block: var(--space-16); max-width: 780px; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: var(--space-5);">
+        <div style="display: inline-flex; align-items: center; padding: var(--space-2) var(--space-4); background-color: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border-radius: var(--radius-full); font-size: var(--text-body-sm); font-weight: var(--weight-medium); color: var(--text-primary);">
+          ★ 4.9 · 2,400+ Happy Homes
+        </div>
+        <h1 class="text-display-xl" style="color: var(--color-white); margin: 0;">Sofa In. Stress Out. Instantly.</h1>
+        <p class="text-body-lg" style="color: rgba(255,255,255,0.85); max-width: 540px; margin: 0;">A premium sofa that compresses to fit through any door — and looks like it never had to.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; margin-top: var(--space-2);">
+          <a href="#products" class="btn btn--primary btn--lg" style="background: var(--color-white); color: var(--color-ink-950); border-color: var(--color-white);">Shop the Collection</a>
+          <a href="#assembly" class="btn btn--ghost btn--lg" style="color: var(--color-white); border-color: rgba(255,255,255,0.3);">See How It Works →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── VALUE PROPOSITIONS ─── -->
+    <section class="section-spacing">
+      <div class="page-width">
+        <div style="text-align: center; margin-bottom: var(--space-10);">
+          <h2 class="text-heading-xl">Why EzHome?</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8);">
+          <!-- Prop 1 -->
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: var(--radius-lg); background-color: var(--color-sage-50); color: var(--color-sage-700);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--weight-semibold); margin: 0;">Fits In Your Car</h3>
+            <p class="text-body-md color-secondary" style="margin: 0; max-width: 240px;">Compressed to 1/5th the size. Fits through any doorway.</p>
+          </div>
+          <!-- Prop 2 -->
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: var(--radius-lg); background-color: var(--color-sage-50); color: var(--color-sage-700);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--weight-semibold); margin: 0;">10-Min Setup</h3>
+            <p class="text-body-md color-secondary" style="margin: 0; max-width: 240px;">No tools. No stress. Zero assembly required.</p>
+          </div>
+          <!-- Prop 3 -->
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: var(--radius-lg); background-color: var(--color-sage-50); color: var(--color-sage-700);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M1 3h15v13H1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 8h4l3 4v5h-7V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="18.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--weight-semibold); margin: 0;">Free Shipping</h3>
+            <p class="text-body-md color-secondary" style="margin: 0; max-width: 240px;">Delivered to your door in 3–7 business days.</p>
+          </div>
+          <!-- Prop 4 -->
+          <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+            <div style="display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: var(--radius-lg); background-color: var(--color-sage-50); color: var(--color-sage-700);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: var(--text-heading-md); font-weight: var(--weight-semibold); margin: 0;">100-Night Trial</h3>
+            <p class="text-body-md color-secondary" style="margin: 0; max-width: 240px;">Love it or return it — no questions asked.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FEATURED COLLECTION ─── -->
+    <section id="products" class="section-spacing" style="background-color: var(--bg-secondary);">
+      <div class="page-width">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-8);">
+          <h2 class="text-heading-xl" style="margin: 0;">Our Bestsellers</h2>
+          <a href="#" style="font-weight: var(--weight-medium); font-size: var(--text-body-md);">View All →</a>
+        </div>
+        <div class="grid grid--4">
+          <!-- Product 1 -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div class="placeholder-product" style="position: relative;">
+              <span style="position: absolute; top: var(--space-2); left: var(--space-2);"><span class="badge badge--bestseller">Bestseller</span></span>
+              Sofa Image
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-body-md); font-weight: var(--weight-semibold); margin: 0;">EzHome 2-Seater</h3>
+              <p style="font-size: var(--text-body-md); font-weight: var(--weight-semibold); color: var(--text-primary); margin: 0;">$1,299</p>
+              <p class="text-body-sm color-secondary" style="margin: 0;">5 colours available</p>
+            </div>
+          </div>
+          <!-- Product 2 -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div class="placeholder-product" style="position: relative;">
+              <span style="position: absolute; top: var(--space-2); left: var(--space-2);"><span class="badge badge--new">New</span></span>
+              Sofa Image
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-body-md); font-weight: var(--weight-semibold); margin: 0;">EzHome 3-Seater</h3>
+              <p style="font-size: var(--text-body-md); font-weight: var(--weight-semibold); color: var(--text-primary); margin: 0;">$1,799</p>
+              <p class="text-body-sm color-secondary" style="margin: 0;">8 colours available</p>
+            </div>
+          </div>
+          <!-- Product 3 -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div class="placeholder-product">Sofa Image</div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-body-md); font-weight: var(--weight-semibold); margin: 0;">EzHome L-Shape Modular</h3>
+              <p style="font-size: var(--text-body-md); font-weight: var(--weight-semibold); color: var(--text-primary); margin: 0;">$2,499</p>
+              <p class="text-body-sm color-secondary" style="margin: 0;">12 configurations</p>
+            </div>
+          </div>
+          <!-- Product 4 -->
+          <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+            <div class="placeholder-product" style="position: relative;">
+              <span style="position: absolute; top: var(--space-2); left: var(--space-2);"><span class="badge badge--sale">Sale</span></span>
+              Bed Image
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <h3 style="font-family: var(--font-display); font-size: var(--text-body-md); font-weight: var(--weight-semibold); margin: 0;">EzHome Compression Bed</h3>
+              <div style="display: flex; gap: var(--space-2); align-items: center;">
+                <p style="font-size: var(--text-body-md); font-weight: var(--weight-semibold); color: var(--color-coral-500); margin: 0;">$899</p>
+                <p style="font-size: var(--text-body-sm); color: var(--text-tertiary); text-decoration: line-through; margin: 0;">$999</p>
+              </div>
+              <p class="text-body-sm color-secondary" style="margin: 0;">Queen & King</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── IMAGE WITH TEXT (Assembly CTA) ─── -->
+    <section id="assembly" class="section-spacing">
+      <div class="page-width">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-10); align-items: center;">
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-cream-100), var(--color-sage-50)); border-radius: var(--radius-xl); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <div style="text-align: center; color: var(--text-tertiary);">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" style="margin: 0 auto var(--space-2);"><polygon points="5 3 19 12 5 21 5 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              <p class="text-body-sm">Assembly Video</p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <span class="text-overline color-accent">HOW IT WORKS</span>
+            <h2 class="text-heading-xl" style="margin: 0;">10 Minutes. Zero Tools. Seriously.</h2>
+            <div class="text-body-lg color-secondary">
+              <p>Watch how easy it is to set up your EzHome sofa. Unbox, expand, and sink in — it's genuinely that simple. No Allen keys. No frustration. No calling your mate for help.</p>
+            </div>
+            <div style="margin-top: var(--space-2);">
+              <a href="#" class="btn btn--primary">Watch Video</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ─── -->
+    <section class="section-spacing" style="background-color: var(--bg-secondary);">
+      <div class="page-width">
+        <div style="text-align: center; margin-bottom: var(--space-8); display: flex; flex-direction: column; gap: var(--space-2);">
+          <span class="text-overline color-accent">DON'T TAKE OUR WORD FOR IT</span>
+          <h2 class="text-heading-xl">2,400+ apartments. Zero sofas stuck in lobbies.</h2>
+        </div>
+
+        <!-- Stats Bar -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); margin-bottom: var(--space-10); padding: var(--space-8) 0; border-top: 1px solid var(--border-secondary); border-bottom: 1px solid var(--border-secondary);">
+          <div style="text-align: center; display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-heading-xl);">2,400+</span>
+            <span class="text-body-sm color-secondary">sofas delivered to apartments</span>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-heading-xl);">4.9 ★</span>
+            <span class="text-body-sm color-secondary">average review (1,200+ ratings)</span>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-heading-xl);">&lt;5 min</span>
+            <span class="text-body-sm color-secondary">doorway-to-done setup time</span>
+          </div>
+          <div style="text-align: center; display: flex; flex-direction: column; gap: var(--space-1);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-bold); font-size: var(--text-heading-xl);">96%</span>
+            <span class="text-body-sm color-secondary">say "easier than any sofa move"</span>
+          </div>
+        </div>
+
+        <!-- Testimonial Cards -->
+        <div class="grid grid--3">
+          <!-- Card 1 -->
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-secondary); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="color: var(--color-amber-400); font-size: 16px;">★★★★★</div>
+            <blockquote class="text-body-md" style="margin: 0; font-style: italic; flex: 1;">"We live on the 4th floor, no lift. Two of us carried it upstairs in the box. I still can't believe it expanded into THIS."</blockquote>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <span class="text-body-md" style="font-weight: var(--weight-semibold);">Sam & Jess T.</span>
+              <span class="text-body-sm color-secondary">Melbourne · 2-seater in Charcoal</span>
+            </div>
+            <span style="display: inline-flex; align-self: flex-start; padding: var(--space-1) var(--space-2); background-color: var(--color-sage-50); color: var(--color-sage-700); font-size: 11px; font-weight: var(--weight-semibold); border-radius: var(--radius-sm);">Verified Buyer</span>
+          </div>
+          <!-- Card 2 -->
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-secondary); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="color: var(--color-amber-400); font-size: 16px;">★★★★★</div>
+            <blockquote class="text-body-md" style="margin: 0; font-style: italic; flex: 1;">"Third apartment in two years. This sofa has moved with me every time — no removalists, no scratched walls, no stress."</blockquote>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <span class="text-body-md" style="font-weight: var(--weight-semibold);">David K.</span>
+              <span class="text-body-sm color-secondary">Sydney · 3-seater L-shape in Oat</span>
+            </div>
+            <span style="display: inline-flex; align-self: flex-start; padding: var(--space-1) var(--space-2); background-color: var(--color-sage-50); color: var(--color-sage-700); font-size: 11px; font-weight: var(--weight-semibold); border-radius: var(--radius-sm);">Verified Buyer</span>
+          </div>
+          <!-- Card 3 -->
+          <div style="background: var(--bg-primary); border: 1px solid var(--border-secondary); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="color: var(--color-amber-400); font-size: 16px;">★★★★★</div>
+            <blockquote class="text-body-md" style="margin: 0; font-style: italic; flex: 1;">"Honestly looks more expensive than it is. Guests always ask where it's from. The washable covers are a game-changer with kids."</blockquote>
+            <div style="display: flex; flex-direction: column; gap: var(--space-1);">
+              <span class="text-body-md" style="font-weight: var(--weight-semibold);">Michelle L.</span>
+              <span class="text-body-sm color-secondary">Brisbane · Modular 4-piece in Sage</span>
+            </div>
+            <span style="display: inline-flex; align-self: flex-start; padding: var(--space-1) var(--space-2); background-color: var(--color-sage-50); color: var(--color-sage-700); font-size: 11px; font-weight: var(--weight-semibold); border-radius: var(--radius-sm);">Verified Buyer</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── INSTAGRAM / UGC FEED ─── -->
+    <section class="section-spacing">
+      <div class="page-width">
+        <div style="text-align: center; margin-bottom: var(--space-8);">
+          <span class="text-overline color-accent">JOIN THE COMMUNITY</span>
+          <h2 class="text-heading-xl" style="margin-top: var(--space-2);">#MyEzHome</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-2);">
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-cream-100), var(--color-sage-50)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-cream-200), var(--color-coral-50)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-sage-50), var(--color-cream-100)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-cream-100), var(--color-sky-50)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-coral-50), var(--color-cream-200)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+          <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--color-cream-200), var(--color-sage-50)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;"><span class="text-body-sm color-secondary">📷</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── NEWSLETTER ─── -->
+    <section class="section-spacing" style="background-color: var(--bg-inverse); color: var(--text-inverse);">
+      <div class="page-width" style="max-width: 640px; text-align: center;">
+        <h2 class="text-heading-xl" style="color: var(--color-white); margin-bottom: var(--space-3);">Get 10% off your first sofa</h2>
+        <p class="text-body-lg" style="color: rgba(255,255,255,0.7); margin-bottom: var(--space-6);">Plus early access to new drops, exclusive colours, and the occasional moving tip.</p>
+        <form style="display: flex; gap: var(--space-2); max-width: 440px; margin-inline: auto;">
+          <input type="email" placeholder="Enter your email" class="form-input" style="flex: 1; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white;">
+          <button type="submit" class="btn btn--accent">Subscribe</button>
+        </form>
+        <p class="text-body-sm" style="color: rgba(255,255,255,0.4); margin-top: var(--space-3);">No spam. Unsubscribe anytime. We respect your inbox.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer style="background-color: var(--bg-secondary); padding-top: var(--space-16); padding-bottom: var(--space-8);">
+    <div class="page-width">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); padding-bottom: var(--space-10); border-bottom: 1px solid var(--border-secondary);">
+        <!-- Shop -->
+        <div>
+          <h3 class="text-body-md" style="font-weight: var(--weight-semibold); margin-bottom: var(--space-3);">Shop</h3>
+          <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">All Sofas</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">2-Seater</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">3-Seater</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">L-Shape Modular</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Covers & Accessories</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Gift Cards</a></li>
+          </ul>
+        </div>
+        <!-- Support -->
+        <div>
+          <h3 class="text-body-md" style="font-weight: var(--weight-semibold); margin-bottom: var(--space-3);">Support</h3>
+          <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">FAQ</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Delivery & Returns</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Care Guide</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Warranty</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Contact Us</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Assembly Help</a></li>
+          </ul>
+        </div>
+        <!-- Company -->
+        <div>
+          <h3 class="text-body-md" style="font-weight: var(--weight-semibold); margin-bottom: var(--space-3);">Company</h3>
+          <ul style="display: flex; flex-direction: column; gap: var(--space-2);">
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Our Story</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Sustainability</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Press</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Careers</a></li>
+            <li><a href="#" style="font-size: var(--text-body-sm); color: var(--text-secondary);">Affiliate Program</a></li>
+          </ul>
+        </div>
+        <!-- Newsletter -->
+        <div>
+          <h3 class="text-body-md" style="font-weight: var(--weight-semibold); margin-bottom: var(--space-3);">Stay Connected</h3>
+          <p class="text-body-sm color-secondary" style="margin-bottom: var(--space-3);">Early access to new drops and exclusive offers.</p>
+          <form style="display: flex; gap: var(--space-2);">
+            <input type="email" placeholder="Enter your email" class="form-input" style="flex: 1; font-size: var(--text-body-sm);">
+            <button type="submit" class="btn btn--primary btn--sm">→</button>
+          </form>
+          <div style="display: flex; gap: var(--space-3); margin-top: var(--space-4);">
+            <a href="#" style="color: var(--text-secondary);" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg></a>
+            <a href="#" style="color: var(--text-secondary);" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 8a5 5 0 01-5-5h-3v13a3 3 0 11-2-2.83V9.6A7 7 0 1019 13V8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#" style="color: var(--text-secondary);" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a href="#" style="color: var(--text-secondary);" aria-label="Pinterest"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.25 2.67 7.87 6.42 9.3-.09-.79-.17-2 .04-2.87.18-.78 1.2-5.08 1.2-5.08s-.3-.61-.3-1.52c0-1.42.82-2.48 1.85-2.48.87 0 1.29.66 1.29 1.44 0 .88-.56 2.2-.85 3.42-.24 1.02.51 1.86 1.52 1.86 1.83 0 3.23-1.93 3.23-4.7 0-2.46-1.77-4.18-4.29-4.18-2.92 0-4.64 2.19-4.64 4.46 0 .88.34 1.83.77 2.35.08.1.1.19.07.29l-.29 1.16c-.04.18-.15.22-.34.13-1.25-.58-2.03-2.42-2.03-3.89 0-3.16 2.3-6.07 6.62-6.07 3.48 0 6.18 2.48 6.18 5.79 0 3.45-2.18 6.23-5.2 6.23-1.02 0-1.97-.53-2.3-1.15l-.62 2.38c-.22.88-.83 1.97-1.24 2.64.93.29 1.92.44 2.95.44 5.52 0 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-top: var(--space-6); flex-wrap: wrap; gap: var(--space-4);">
+        <div class="text-body-sm color-secondary">© 2026 EzHome. All rights reserved.</div>
+        <div style="display: flex; gap: var(--space-4);">
+          <a href="#" class="text-body-sm color-secondary">Terms of Service</a>
+          <a href="#" class="text-body-sm color-secondary">Privacy Policy</a>
+          <a href="#" class="text-body-sm color-secondary">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

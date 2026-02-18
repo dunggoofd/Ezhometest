@@ -1,0 +1,151 @@
+{%- comment -%}
+  EzHome — Featured Collection Section
+  Product card grid from a selected collection
+{%- endcomment -%}
+
+<div class="featured-collection section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <div class="featured-collection__header reveal">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="featured-collection__heading text-heading-xl">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.show_view_all -%}
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank -%}
+          <a href="{{ collection.url }}" class="featured-collection__view-all btn btn--ghost">
+            View All
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    <div class="featured-collection__grid grid grid--{{ section.settings.columns }}">
+      {%- assign collection = collections[section.settings.collection] -%}
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          <div class="reveal" style="--reveal-delay: {{ forloop.index }};">
+            {%- render 'product-card', product: product -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <div class="product-card product-card--placeholder reveal" style="--reveal-delay: {{ i }};">
+            <div class="product-card__media">
+              {{ 'product-1' | placeholder_svg_tag: 'product-card__image' }}
+            </div>
+            <div class="product-card__info">
+              <h3 class="product-card__title">Example Product {{ i }}</h3>
+              <p class="product-card__price">$1,299.00</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .featured-collection__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .featured-collection__heading {
+    margin: 0;
+  }
+
+  .featured-collection__view-all svg {
+    transition: transform var(--duration-fast) var(--ease-default);
+  }
+
+  .featured-collection__view-all:hover svg {
+    transform: translateX(3px);
+  }
+
+  .product-card--placeholder .product-card__media {
+    aspect-ratio: 1;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .product-card--placeholder .product-card__image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .product-card--placeholder .product-card__info {
+    padding-top: var(--space-3);
+  }
+
+  .product-card--placeholder .product-card__title {
+    font-size: var(--text-body-md);
+    font-weight: var(--weight-medium);
+    margin: 0 0 var(--space-1);
+  }
+
+  .product-card--placeholder .product-card__price {
+    font-size: var(--text-body-md);
+    font-weight: var(--weight-semibold);
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "tag": "section",
+  "class": "section--featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "default": "4",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' link",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection",
+      "category": "EzHome"
+    }
+  ]
+}
+{% endschema %}

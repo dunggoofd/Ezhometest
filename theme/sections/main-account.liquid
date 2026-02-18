@@ -1,0 +1,80 @@
+{%- comment -%}
+  EzHome — Customer Account Section
+{%- endcomment -%}
+
+<div class="customer-account section-spacing">
+  <div class="page-width">
+    <div class="customer-account__header flex flex--between" style="margin-bottom: var(--space-8);">
+      <h1 class="text-heading-2xl">{{ 'customer.account.title' | t }}</h1>
+      <a href="/account/logout" class="btn btn--ghost btn--sm">{{ 'customer.account.logout' | t }}</a>
+    </div>
+
+    <div class="customer-account__grid">
+      {%- comment -%} Order History {%- endcomment -%}
+      <div class="customer-account__orders">
+        <h2 class="text-heading-lg" style="margin-bottom: var(--space-4);">{{ 'customer.account.order_history' | t }}</h2>
+
+        {%- if customer.orders.size > 0 -%}
+          <div class="customer-account__orders-table">
+            <div class="customer-account__orders-header">
+              <span class="text-body-sm color-secondary">Order</span>
+              <span class="text-body-sm color-secondary">Date</span>
+              <span class="text-body-sm color-secondary">Status</span>
+              <span class="text-body-sm color-secondary" style="text-align: right;">Total</span>
+            </div>
+
+            {%- for order in customer.orders -%}
+              <div class="customer-account__order-row">
+                <a href="{{ order.customer_url }}" class="text-body-md" style="font-weight: var(--weight-semibold);">{{ order.name }}</a>
+                <span class="text-body-sm color-secondary">{{ order.created_at | date: '%B %d, %Y' }}</span>
+                <span class="badge badge--{{ order.financial_status }}">{{ order.financial_status_label }}</span>
+                <span class="text-body-md" style="text-align: right; font-weight: var(--weight-medium);">{{ order.total_price | money }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <p class="text-body-md color-secondary">{{ 'customer.account.no_orders' | t }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Account Details {%- endcomment -%}
+      <div class="customer-account__details">
+        <h2 class="text-heading-lg" style="margin-bottom: var(--space-4);">Account Details</h2>
+        <div class="text-body-md" style="display: flex; flex-direction: column; gap: var(--space-1);">
+          <span style="font-weight: var(--weight-semibold);">{{ customer.name }}</span>
+          <span class="color-secondary">{{ customer.email }}</span>
+          {%- if customer.default_address -%}
+            <span class="color-secondary">{{ customer.default_address | format_address }}</span>
+          {%- endif -%}
+        </div>
+        <a href="/account/addresses" class="btn btn--ghost btn--sm" style="margin-top: var(--space-3);">Manage Addresses</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .customer-account__grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-10); }
+  .customer-account__orders-header, .customer-account__order-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: var(--space-3); align-items: center;
+    padding: var(--space-3) 0;
+  }
+  .customer-account__orders-header { border-bottom: 1px solid var(--border-secondary); }
+  .customer-account__order-row { border-bottom: 1px solid var(--border-secondary); }
+
+  @media (max-width: 768px) {
+    .customer-account__grid { grid-template-columns: 1fr; }
+    .customer-account__orders-header { display: none; }
+    .customer-account__order-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Customer Account",
+  "tag": "section",
+  "class": "section--customer-account",
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

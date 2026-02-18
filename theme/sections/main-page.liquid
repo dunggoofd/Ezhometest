@@ -1,0 +1,33 @@
+{%- comment -%}
+  EzHome — Main Page Section
+  Renders Shopify page content
+{%- endcomment -%}
+
+<div class="main-page section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width {% if section.settings.content_width == 'narrow' %}narrow-width{% else %}content-width{% endif %}">
+    <div class="main-page__content rte">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "tag": "section",
+  "class": "section--main-page",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "default": "narrow",
+      "options": [
+        { "value": "narrow", "label": "Narrow" },
+        { "value": "default", "label": "Default" }
+      ]
+    }
+  ]
+}
+{% endschema %}

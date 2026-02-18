@@ -1,0 +1,33 @@
+{%- comment -%}
+  EzHome — Rich Text Section
+  Heading + richtext body for flexible content
+{%- endcomment -%}
+
+<div class="rich-text section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width{% if section.settings.narrow %} narrow-width{% endif %}">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="rich-text__heading text-heading-xl">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="rich-text__body rte text-body-lg">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .rich-text__heading { margin-bottom: var(--space-4); }
+</style>
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "tag": "section",
+  "class": "section--rich-text",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "checkbox", "id": "narrow", "label": "Narrow width", "default": true }
+  ],
+  "presets": [{ "name": "Rich Text", "category": "EzHome" }]
+}
+{% endschema %}

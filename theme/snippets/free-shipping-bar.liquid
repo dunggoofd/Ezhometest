@@ -1,0 +1,90 @@
+{%- comment -%}
+  Renders free shipping progress bar.
+
+  Usage:
+    {% render 'free-shipping-bar', cart: cart %}
+
+  Parameters:
+    - cart: Shopify cart object
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = settings.cart_free_shipping_threshold | times: 1
+  assign cart_total = cart.total_price
+  assign remaining = threshold | minus: cart_total
+  assign achieved = false
+  assign progress = cart_total | times: 100 | divided_by: threshold
+
+  if progress > 100
+    assign progress = 100
+  endif
+
+  if remaining <= 0
+    assign achieved = true
+  endif
+-%}
+
+{%- if settings.cart_show_free_shipping_bar -%}
+  <div class="free-shipping-bar" data-free-shipping-bar>
+    <div class="free-shipping-bar__text text-body-sm">
+      {%- if achieved -%}
+        <span class="free-shipping-bar__message free-shipping-bar__message--success">
+          {{ 'cart.free_shipping_achieved' | t }}
+        </span>
+      {%- else -%}
+        <span class="free-shipping-bar__message">
+          {{ 'cart.free_shipping_message' | t: amount: remaining | money }}
+        </span>
+      {%- endif -%}
+    </div>
+
+    <div class="free-shipping-bar__track">
+      <div
+        class="free-shipping-bar__progress{% if achieved %} free-shipping-bar__progress--full{% endif %}"
+        style="width: {{ progress }}%;"
+        role="progressbar"
+        aria-valuenow="{{ progress }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  .free-shipping-bar {
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .free-shipping-bar__text {
+    margin-bottom: var(--space-2);
+    font-weight: var(--weight-medium);
+  }
+
+  .free-shipping-bar__message--success {
+    color: var(--status-success);
+  }
+
+  .free-shipping-bar__track {
+    width: 100%;
+    height: 4px;
+    background-color: var(--border-secondary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .free-shipping-bar__progress {
+    height: 100%;
+    background-color: var(--interactive-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-smooth);
+  }
+
+  .free-shipping-bar__progress--full {
+    background-color: var(--status-success);
+  }
+</style>

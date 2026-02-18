@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "page-banner": {
+      "type": "page-banner",
+      "settings": {}
+    },
+    "main-page": {
+      "type": "main-page",
+      "settings": {
+        "narrow": true
+      }
+    }
+  },
+  "order": ["page-banner", "main-page"]
+}

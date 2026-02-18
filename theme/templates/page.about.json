@@ -1,0 +1,44 @@
+{
+  "sections": {
+    "about-hero": {
+      "type": "image-with-text",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Furniture That Gets Out Of Your Way",
+        "text": "<p>We started EzHome because moving shouldn't mean choosing between a van rental and sleeping on the floor. Our compression-packed sofas and beds ship in a box, assemble in under 10 minutes with zero tools, and look like you hired an interior designer.</p>",
+        "cta_text": "Shop Now",
+        "cta_url": "shopify://collections/all",
+        "layout": "image_first"
+      }
+    },
+    "values": {
+      "type": "multi-column",
+      "settings": {
+        "heading": "What We Stand For"
+      },
+      "blocks": {
+        "value-1": { "type": "column", "settings": { "heading": "Radical Simplicity", "text": "<p>Every product must pass the 10-minute, zero-tool test. If it's complicated, it doesn't ship.</p>" } },
+        "value-2": { "type": "column", "settings": { "heading": "Honest Materials", "text": "<p>CertiPUR-US® foam, FSC-certified frames, OEKO-TEX® fabrics. We list every material, every source.</p>" } },
+        "value-3": { "type": "column", "settings": { "heading": "Accessible Design", "text": "<p>Great furniture shouldn't require a trust fund. We cut the middlemen so you get quality at a fair price.</p>" } }
+      },
+      "block_order": ["value-1", "value-2", "value-3"]
+    },
+    "team-gallery": {
+      "type": "image-gallery",
+      "settings": {
+        "eyebrow": "The Humans Behind It",
+        "heading": "Our Team",
+        "columns": 3,
+        "aspect_ratio": "1/1"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-signup",
+      "settings": {
+        "heading": "Join the EzHome Family",
+        "text": "Early access to new drops, design tips, and exclusive offers."
+      }
+    }
+  },
+  "order": ["about-hero", "values", "team-gallery", "newsletter"]
+}

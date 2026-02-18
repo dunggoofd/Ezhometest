@@ -1,0 +1,66 @@
+{%- comment -%}
+  EzHome — Customer Login Section
+{%- endcomment -%}
+
+<div class="customer-login section-spacing">
+  <div class="page-width narrow-width">
+    <div class="customer-form" style="max-width: 440px; margin: 0 auto;">
+      <h1 class="text-heading-2xl" style="text-align: center; margin-bottom: var(--space-6);">{{ 'customer.login.title' | t }}</h1>
+
+      {%- form 'customer_login', class: 'customer-form__fields' -%}
+        {%- if form.errors -%}
+          <div class="contact-form__errors">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label class="form-label" for="customer-email">{{ 'customer.login.email' | t }}</label>
+          <input type="email" name="customer[email]" id="customer-email" class="form-input" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="customer-password">{{ 'customer.login.password' | t }}</label>
+          <input type="password" name="customer[password]" id="customer-password" class="form-input" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full btn--lg">{{ 'customer.login.sign_in' | t }}</button>
+
+        <div style="text-align: center; display: flex; flex-direction: column; gap: var(--space-2);">
+          <a href="/account/register" class="text-body-sm">{{ 'customer.login.create_account' | t }}</a>
+          <a href="#recover" class="text-body-sm color-secondary">{{ 'customer.login.forgot_password' | t }}</a>
+        </div>
+      {%- endform -%}
+
+      {%- comment -%} Password Recovery {%- endcomment -%}
+      <div id="recover" class="customer-form__recover" style="display: none; margin-top: var(--space-8);">
+        <h2 class="text-heading-lg" style="text-align: center; margin-bottom: var(--space-4);">Reset Password</h2>
+        {%- form 'recover_customer_password', class: 'customer-form__fields' -%}
+          <div class="form-field">
+            <label class="form-label" for="recover-email">Email</label>
+            <input type="email" name="email" id="recover-email" class="form-input" required autocomplete="email">
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">Send Reset Link</button>
+          <a href="#login" class="text-body-sm" style="text-align: center;">Back to Login</a>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .customer-form__fields { display: flex; flex-direction: column; gap: var(--space-4); }
+</style>
+
+<script>
+  if (window.location.hash === '#recover') {
+    document.querySelector('.customer-form__recover').style.display = 'block';
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Customer Login",
+  "tag": "section",
+  "class": "section--customer-login",
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

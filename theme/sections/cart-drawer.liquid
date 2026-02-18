@@ -1,0 +1,226 @@
+{%- comment -%}
+  EzHome — Cart Drawer Section
+  AJAX-powered slide-out cart
+{%- endcomment -%}
+
+<cart-drawer data-section-id="{{ section.id }}" aria-label="{{ 'cart.title' | t }}">
+  <div class="cart-drawer__overlay" data-drawer-overlay></div>
+
+  <div class="cart-drawer__panel" data-drawer-content role="dialog" aria-modal="true">
+    <header class="cart-drawer__header">
+      <h2 class="cart-drawer__title text-heading-md">
+        {{ 'cart.title' | t }}
+        <span class="cart-drawer__count" data-cart-count>{{ cart.item_count }}</span>
+      </h2>
+      <button class="cart-drawer__close" data-drawer-close aria-label="{{ 'general.accessibility.close' | t }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+
+    {%- if cart.item_count > 0 -%}
+      {%- render 'free-shipping-bar', cart: cart -%}
+
+      <div class="cart-drawer__items">
+        {%- for item in cart.items -%}
+          {%- render 'cart-item', item: item -%}
+        {%- endfor -%}
+      </div>
+
+      <footer class="cart-drawer__footer">
+        {%- if cart.cart_level_discount_applications.size > 0 -%}
+          <div class="cart-drawer__discounts">
+            {%- for discount in cart.cart_level_discount_applications -%}
+              <div class="cart-drawer__discount flex flex--between">
+                <span>{{ discount.title }}</span>
+                <span>-{{ discount.total_allocated_amount | money }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="cart-drawer__subtotal flex flex--between">
+          <span class="text-body-lg" style="font-weight: var(--weight-semibold);">{{ 'cart.subtotal' | t }}</span>
+          <span class="text-body-lg" style="font-weight: var(--weight-bold);" data-cart-subtotal>{{ cart.total_price | money }}</span>
+        </div>
+
+        <p class="cart-drawer__note text-body-sm color-secondary">
+          {{ 'cart.shipping_note' | t }}
+        </p>
+
+        <a href="/checkout" class="btn btn--primary btn--full btn--lg">
+          {{ 'cart.checkout' | t }}
+        </a>
+
+        <a href="{{ routes.cart_url }}" class="cart-drawer__view-cart text-body-sm">
+          View full cart
+        </a>
+      </footer>
+
+    {%- else -%}
+      <div class="cart-drawer__empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="color: var(--text-tertiary);">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 6h18" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <p class="text-body-lg" style="font-weight: var(--weight-medium);">{{ 'cart.empty' | t }}</p>
+        <a href="/collections/all" class="btn btn--primary">
+          {{ 'cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</cart-drawer>
+
+{{ 'section-cart-drawer.js' | asset_url | script_tag: defer: true }}
+
+<style>
+  cart-drawer {
+    display: contents;
+  }
+
+  cart-drawer:not([open]) .cart-drawer__overlay,
+  cart-drawer:not([open]) .cart-drawer__panel {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .cart-drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-overlay);
+    z-index: var(--z-drawer);
+    opacity: 0;
+    transition: opacity var(--duration-slow) var(--ease-default);
+  }
+
+  cart-drawer[open] .cart-drawer__overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cart-drawer__panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 90vw);
+    background-color: var(--bg-primary);
+    z-index: calc(var(--z-drawer) + 1);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform var(--duration-slow) var(--ease-smooth);
+    box-shadow: var(--shadow-xl);
+  }
+
+  cart-drawer[open] .cart-drawer__panel {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .cart-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--border-secondary);
+    flex-shrink: 0;
+  }
+
+  .cart-drawer__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .cart-drawer__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-full);
+    font-size: var(--text-body-sm);
+    font-weight: var(--weight-medium);
+  }
+
+  .cart-drawer__close {
+    color: var(--text-secondary);
+    padding: var(--space-1);
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  .cart-drawer__close:hover {
+    color: var(--text-primary);
+  }
+
+  .cart-drawer__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .cart-drawer__footer {
+    padding: var(--space-5);
+    border-top: 1px solid var(--border-secondary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    flex-shrink: 0;
+  }
+
+  .cart-drawer__note {
+    text-align: center;
+  }
+
+  .cart-drawer__view-cart {
+    text-align: center;
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cart-drawer__empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    padding: var(--space-8);
+    text-align: center;
+  }
+
+  .cart-drawer__discounts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    color: var(--status-success);
+    font-size: var(--text-body-sm);
+  }
+
+  .cart-item--loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .cart-item--removing {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all var(--duration-slow) var(--ease-default);
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "tag": "section",
+  "class": "cart-drawer-section",
+  "settings": []
+}
+{% endschema %}

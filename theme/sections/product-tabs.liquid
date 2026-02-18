@@ -1,0 +1,147 @@
+{%- comment -%}
+  EzHome — Product Tabs Section
+  Accordion/tabs for specs, assembly, shipping
+{%- endcomment -%}
+
+<div class="product-tabs section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width content-width">
+    <accordion-group class="product-tabs__group" data-allow-multiple="false">
+      {%- for block in section.blocks -%}
+        <details class="product-tabs__item" {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}>
+          <summary class="product-tabs__trigger">
+            <span class="product-tabs__trigger-text text-heading-sm">{{ block.settings.title }}</span>
+            <svg class="product-tabs__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="product-tabs__content rte text-body-md">
+            {%- if block.settings.content_source == 'page' and block.settings.page_handle != blank -%}
+              {%- assign tab_page = pages[block.settings.page_handle] -%}
+              {%- if tab_page != blank -%}
+                {{ tab_page.content }}
+              {%- endif -%}
+            {%- elsif block.settings.content_source == 'metafield' and block.settings.metafield_key != blank -%}
+              {%- assign meta_parts = block.settings.metafield_key | split: '.' -%}
+              {%- if meta_parts.size == 2 -%}
+                {{ product.metafields[meta_parts[0]][meta_parts[1]] | default: 'Content coming soon.' }}
+              {%- endif -%}
+            {%- elsif block.settings.custom_content != blank -%}
+              {{ block.settings.custom_content }}
+            {%- else -%}
+              <p>Content coming soon.</p>
+            {%- endif -%}
+          </div>
+        </details>
+      {%- endfor -%}
+    </accordion-group>
+  </div>
+</div>
+
+<style>
+  .product-tabs__group {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border-secondary);
+  }
+
+  .product-tabs__item {
+    border-bottom: 1px solid var(--border-secondary);
+  }
+
+  .product-tabs__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) 0;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .product-tabs__trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .product-tabs__icon {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-default);
+  }
+
+  details[open] .product-tabs__icon {
+    transform: rotate(180deg);
+  }
+
+  .product-tabs__content {
+    padding-bottom: var(--space-6);
+    color: var(--text-secondary);
+  }
+
+  .product-tabs__content p:first-child {
+    margin-top: 0;
+  }
+
+  .product-tabs__content p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Tabs",
+  "tag": "section",
+  "class": "section--product-tabs",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Specifications"
+        },
+        {
+          "type": "select",
+          "id": "content_source",
+          "label": "Content source",
+          "default": "custom",
+          "options": [
+            { "value": "custom", "label": "Custom content" },
+            { "value": "page", "label": "Page content" },
+            { "value": "metafield", "label": "Product metafield" }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "custom_content",
+          "label": "Custom content"
+        },
+        {
+          "type": "text",
+          "id": "page_handle",
+          "label": "Page handle",
+          "info": "Used when content source is 'Page content'"
+        },
+        {
+          "type": "text",
+          "id": "metafield_key",
+          "label": "Metafield key",
+          "info": "e.g. custom.specifications"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tabs",
+      "blocks": [
+        { "type": "tab", "settings": { "title": "Specifications" } },
+        { "type": "tab", "settings": { "title": "Assembly" } },
+        { "type": "tab", "settings": { "title": "Shipping & Returns" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,27 @@
+{
+  "current": {
+    "color_primary": "#141416",
+    "color_accent": "#FF6B42",
+    "color_secondary": "#3A6B3A",
+    "color_background": "#FBF9F5",
+    "color_text": "#141416",
+    "color_border": "#E8E6E1",
+    "font_body_scale": 100,
+    "page_width": 1440,
+    "content_width": 1200,
+    "spacing_sections": 80,
+    "cart_type": "drawer",
+    "cart_show_free_shipping_bar": true,
+    "cart_free_shipping_threshold": "15000",
+    "cart_show_cross_sell": true,
+    "trust_delivery_text": "Free Delivery",
+    "trust_assembly_text": "10-Min Assembly",
+    "trust_warranty_text": "5-Year Warranty",
+    "trust_trial_text": "100-Night Trial",
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_tiktok": "",
+    "social_pinterest": "",
+    "social_youtube": ""
+  }
+}

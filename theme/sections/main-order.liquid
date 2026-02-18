@@ -1,0 +1,63 @@
+{%- comment -%}
+  EzHome — Customer Order Detail Section
+{%- endcomment -%}
+
+<div class="customer-order section-spacing">
+  <div class="page-width">
+    <a href="/account" class="text-body-sm color-secondary" style="display: inline-flex; align-items: center; gap: var(--space-1); margin-bottom: var(--space-4);">
+      ← Back to Account
+    </a>
+
+    <h1 class="text-heading-2xl" style="margin-bottom: var(--space-6);">Order {{ order.name }}</h1>
+
+    <div class="customer-order__meta text-body-md color-secondary" style="margin-bottom: var(--space-6);">
+      <span>Placed on {{ order.created_at | date: '%B %d, %Y' }}</span>
+      · <span>{{ order.financial_status_label }}</span>
+      · <span>{{ order.fulfillment_status_label }}</span>
+    </div>
+
+    <div class="customer-order__items">
+      {%- for line_item in order.line_items -%}
+        <div class="customer-order__line-item" style="display: flex; gap: var(--space-4); padding: var(--space-4) 0; border-bottom: 1px solid var(--border-secondary);">
+          {%- if line_item.image -%}
+            <img src="{{ line_item.image | image_url: width: 120 }}" alt="{{ line_item.title | escape }}" width="60" height="60" style="border-radius: var(--radius-md); object-fit: cover;">
+          {%- endif -%}
+          <div style="flex: 1;">
+            <p class="text-body-md" style="font-weight: var(--weight-semibold); margin: 0;">{{ line_item.title }}</p>
+            {%- if line_item.variant_title != blank -%}
+              <p class="text-body-sm color-secondary" style="margin: 0;">{{ line_item.variant_title }}</p>
+            {%- endif -%}
+            <p class="text-body-sm color-secondary" style="margin: 0;">Qty: {{ line_item.quantity }}</p>
+          </div>
+          <span class="text-body-md" style="font-weight: var(--weight-medium);">{{ line_item.final_line_price | money }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="customer-order__summary" style="max-width: 360px; margin-left: auto; margin-top: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2);">
+      <div class="flex flex--between text-body-md"><span>Subtotal</span><span>{{ order.line_items_subtotal_price | money }}</span></div>
+      {%- for shipping_method in order.shipping_methods -%}
+        <div class="flex flex--between text-body-md"><span>Shipping ({{ shipping_method.title }})</span><span>{{ shipping_method.price | money }}</span></div>
+      {%- endfor -%}
+      {%- if order.tax_lines.size > 0 -%}
+        {%- for tax_line in order.tax_lines -%}
+          <div class="flex flex--between text-body-md"><span>Tax ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</span><span>{{ tax_line.price | money }}</span></div>
+        {%- endfor -%}
+      {%- endif -%}
+      <div class="flex flex--between text-heading-md" style="padding-top: var(--space-2); border-top: 1px solid var(--border-secondary);">
+        <span>Total</span>
+        <span>{{ order.total_price | money }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Customer Order",
+  "tag": "section",
+  "class": "section--customer-order",
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,80 @@
+{%- comment -%}
+  Renders a star rating display.
+
+  Usage:
+    {% render 'star-rating', rating: 4.5, count: 128 %}
+
+  Parameters:
+    - rating: Number (0-5)
+    - count: Number of reviews
+    - show_count: Boolean (default: true)
+    - size: 'sm' | 'md' | 'lg' (default: 'sm')
+{%- endcomment -%}
+
+{%- liquid
+  assign show_count = show_count | default: true
+  assign size = size | default: 'sm'
+  assign rating_value = rating | round: 1
+  assign full_stars = rating_value | floor
+  assign half_star = false
+  assign remainder = rating_value | modulo: 1
+  if remainder >= 0.25 and remainder < 0.75
+    assign half_star = true
+  elsif remainder >= 0.75
+    assign full_stars = full_stars | plus: 1
+  endif
+  assign empty_stars = 5 | minus: full_stars
+  if half_star
+    assign empty_stars = empty_stars | minus: 1
+  endif
+-%}
+
+<div class="star-rating star-rating--{{ size }}" role="img" aria-label="{{ rating_value }} out of 5 stars{% if count %}, {{ count }} reviews{% endif %}">
+  <div class="star-rating__stars">
+    {%- for i in (1..full_stars) -%}
+      <svg class="star-rating__icon star-rating__icon--full" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"/>
+      </svg>
+    {%- endfor -%}
+
+    {%- if half_star -%}
+      <svg class="star-rating__icon star-rating__icon--half" viewBox="0 0 20 20" aria-hidden="true">
+        <defs>
+          <linearGradient id="halfGrad">
+            <stop offset="50%" stop-color="currentColor"/>
+            <stop offset="50%" stop-color="var(--color-ink-200)"/>
+          </linearGradient>
+        </defs>
+        <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" fill="url(#halfGrad)"/>
+      </svg>
+    {%- endif -%}
+
+    {%- for i in (1..empty_stars) -%}
+      <svg class="star-rating__icon star-rating__icon--empty" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z" fill="var(--color-ink-200)"/>
+      </svg>
+    {%- endfor -%}
+  </div>
+
+  {%- if show_count and count != blank -%}
+    <span class="star-rating__count text-caption color-secondary">({{ count }})</span>
+  {%- endif -%}
+</div>
+
+<style>
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-amber-500);
+  }
+
+  .star-rating__stars {
+    display: flex;
+    gap: 1px;
+  }
+
+  .star-rating--sm .star-rating__icon { width: 14px; height: 14px; }
+  .star-rating--md .star-rating__icon { width: 18px; height: 18px; }
+  .star-rating--lg .star-rating__icon { width: 22px; height: 22px; }
+</style>

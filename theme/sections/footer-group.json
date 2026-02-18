@@ -1,0 +1,45 @@
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "show_payment_icons": true,
+        "copyright_text": ""
+      },
+      "blocks": {
+        "col-1": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        },
+        "col-2": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Support",
+            "menu": "footer-support"
+          }
+        },
+        "col-3": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer-company"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Join The EzHome Family",
+            "subtext": "Get early access, assembly tips & exclusive deals."
+          }
+        }
+      },
+      "block_order": ["col-1", "col-2", "col-3", "newsletter"]
+    }
+  },
+  "order": ["footer"]
+}

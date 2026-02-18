@@ -1,0 +1,38 @@
+{%- comment -%}
+  EzHome — Page Banner Section
+  Simple page title banner with optional subtitle
+{%- endcomment -%}
+
+<div class="page-banner section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width content-width">
+    {%- render 'breadcrumbs' -%}
+    <h1 class="page-banner__title text-display-lg">
+      {{ section.settings.heading_override | default: page.title | default: 'Page Title' }}
+    </h1>
+    {%- if section.settings.subtext != blank -%}
+      <p class="page-banner__subtext text-body-lg color-secondary">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .page-banner {
+    padding-bottom: var(--space-4);
+  }
+  .page-banner__title { margin: var(--space-3) 0 0; }
+  .page-banner__subtext { margin: var(--space-2) 0 0; max-width: 600px; }
+</style>
+
+{% schema %}
+{
+  "name": "Page Banner",
+  "tag": "section",
+  "class": "section--page-banner",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading_override", "label": "Custom heading", "info": "Leave blank to use page title" },
+    { "type": "text", "id": "subtext", "label": "Subtext" },
+    { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true }
+  ]
+}
+{% endschema %}

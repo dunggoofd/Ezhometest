@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "video-hero": {
+      "type": "video-hero",
+      "settings": {
+        "eyebrow": "Assembly Guide",
+        "heading": "10 Minutes. Zero Tools. Seriously.",
+        "text": "Watch our quick assembly video or follow the step-by-step guide below."
+      }
+    },
+    "assembly-steps": {
+      "type": "assembly-steps",
+      "settings": {
+        "eyebrow": "Step-by-Step",
+        "heading": "Assembly in 3 Easy Steps"
+      }
+    },
+    "tips": {
+      "type": "multi-column",
+      "settings": {
+        "heading": "Pro Tips"
+      },
+      "blocks": {
+        "tip-1": { "type": "column", "settings": { "heading": "Give It Space", "text": "<p>Unbox in the room where you'll use it. The foam expands quickly and the sofa is easier to position before full expansion.</p>" } },
+        "tip-2": { "type": "column", "settings": { "heading": "24-Hour Rule", "text": "<p>While usable immediately, your sofa reaches peak comfort after 24-48 hours as the foam fully decompresses.</p>" } },
+        "tip-3": { "type": "column", "settings": { "heading": "Keep The Box", "text": "<p>Store the original box for 30 days during your trial period, just in case you need a return.</p>" } }
+      },
+      "block_order": ["tip-1", "tip-2", "tip-3"]
+    },
+    "product-cta": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Ready To Build Yours?",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": ["video-hero", "assembly-steps", "tips", "product-cta"]
+}

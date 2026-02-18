@@ -1,0 +1,89 @@
+{%- comment -%}
+  Renders product price with compare-at, sale badge, and currency formatting.
+
+  Usage:
+    {% render 'price', product: product, show_compare: true %}
+
+  Parameters:
+    - product: Product or variant object
+    - show_compare: Show compare-at price (default: true)
+    - class: Additional CSS classes
+{%- endcomment -%}
+
+{%- liquid
+  assign show_compare = show_compare | default: true
+  assign current_variant = product.selected_or_first_available_variant
+  assign price = current_variant.price
+  assign compare_at_price = current_variant.compare_at_price
+  assign on_sale = false
+
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="price {{ class }}{% if on_sale %} price--on-sale{% endif %}{% if product.available == false %} price--sold-out{% endif %}" data-price>
+  {%- if product.price_varies -%}
+    <span class="price__from text-body-sm color-secondary">
+      {{ 'product.price.from' | t: price: '' }}
+    </span>
+  {%- endif -%}
+
+  <span class="price__current" data-price-current>
+    {{ price | money }}
+  </span>
+
+  {%- if on_sale and show_compare -%}
+    <s class="price__compare color-secondary" data-price-compare>
+      {{ compare_at_price | money }}
+    </s>
+
+    {%- assign savings = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round -%}
+    <span class="price__badge badge badge--sale" data-price-badge>
+      Save {{ savings }}%
+    </span>
+  {%- endif -%}
+
+  {%- if current_variant.unit_price_measurement -%}
+    <span class="price__unit text-caption color-secondary">
+      {{ current_variant.unit_price | money }} / {{ current_variant.unit_price_measurement.reference_value }}{{ current_variant.unit_price_measurement.reference_unit }}
+    </span>
+  {%- endif -%}
+</div>
+
+<style>
+  .price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .price__current {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-heading-md);
+    color: var(--text-primary);
+  }
+
+  .price--on-sale .price__current {
+    color: var(--color-coral-500);
+  }
+
+  .price__compare {
+    font-size: var(--text-body-md);
+    text-decoration: line-through;
+  }
+
+  .price__from {
+    font-weight: var(--weight-medium);
+  }
+
+  .price__unit {
+    width: 100%;
+  }
+
+  .price--sold-out .price__current {
+    color: var(--text-secondary);
+  }
+</style>

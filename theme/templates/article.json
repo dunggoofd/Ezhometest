@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main-article": {
+      "type": "main-article",
+      "settings": {
+        "show_date": true,
+        "show_author": true,
+        "show_tags": true,
+        "show_share": true,
+        "show_comments": true
+      }
+    },
+    "article-cta": {
+      "type": "newsletter-signup",
+      "settings": {
+        "heading": "Enjoyed This Article?",
+        "text": "Subscribe to our newsletter for more tips, product launches, and exclusive offers."
+      }
+    },
+    "related-articles": {
+      "type": "main-blog",
+      "disabled": true,
+      "settings": {
+        "posts_per_page": 3,
+        "show_date": true,
+        "show_tags": false
+      }
+    }
+  },
+  "order": ["main-article", "article-cta", "related-articles"]
+}

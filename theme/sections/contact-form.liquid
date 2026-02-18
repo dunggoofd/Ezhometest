@@ -1,0 +1,87 @@
+{%- comment -%}
+  EzHome — Contact Form Section
+{%- endcomment -%}
+
+<div class="contact-form section-spacing" data-section-id="{{ section.id }}">
+  <div class="page-width content-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="contact-form__heading text-heading-xl">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- form 'contact', class: 'contact-form__form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="contact-form__success">
+          <p class="text-body-lg">{{ section.settings.success_message | default: 'Thanks! We\'ll get back to you within 24 hours.' }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="contact-form__errors">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="contact-form__fields">
+        <div class="contact-form__row">
+          <div class="form-field">
+            <label class="form-label" for="contact-name">Name *</label>
+            <input type="text" name="contact[name]" id="contact-name" class="form-input" required value="{{ form.name }}">
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="contact-email">Email *</label>
+            <input type="email" name="contact[email]" id="contact-email" class="form-input" required autocomplete="email" value="{{ form.email }}">
+          </div>
+        </div>
+
+        {%- if section.settings.show_phone -%}
+          <div class="form-field">
+            <label class="form-label" for="contact-phone">Phone (optional)</label>
+            <input type="tel" name="contact[phone]" id="contact-phone" class="form-input" value="{{ form.phone }}">
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_order_number -%}
+          <div class="form-field">
+            <label class="form-label" for="contact-order">Order Number (optional)</label>
+            <input type="text" name="contact[order_number]" id="contact-order" class="form-input" placeholder="#1001">
+          </div>
+        {%- endif -%}
+
+        <div class="form-field">
+          <label class="form-label" for="contact-message">Message *</label>
+          <textarea name="contact[body]" id="contact-message" class="form-textarea" rows="6" required>{{ form.body }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--lg">Send Message</button>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+<style>
+  .contact-form__heading { margin-bottom: var(--space-6); }
+  .contact-form__fields { display: flex; flex-direction: column; gap: var(--space-4); }
+  .contact-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .contact-form__success { padding: var(--space-4); background-color: var(--color-green-50); border-radius: var(--radius-md); margin-bottom: var(--space-4); color: var(--status-success); }
+  .contact-form__errors { padding: var(--space-4); background-color: var(--color-red-50); border-radius: var(--radius-md); margin-bottom: var(--space-4); color: var(--status-error); }
+
+  @media (max-width: 480px) {
+    .contact-form__row { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "tag": "section",
+  "class": "section--contact-form",
+  "limit": 1,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Send Us A Message" },
+    { "type": "checkbox", "id": "show_phone", "label": "Show phone field", "default": true },
+    { "type": "checkbox", "id": "show_order_number", "label": "Show order number field", "default": true },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks! We'll get back to you within 24 hours." }
+  ],
+  "presets": [{ "name": "Contact Form", "category": "EzHome" }]
+}
+{% endschema %}
